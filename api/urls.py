@@ -5,4 +5,5 @@ from .views import health_check
 urlpatterns = [
     path('', health_check, name='health-check'),
     path('users/', include('api.users.urls')),
+    path('catalogos/', include('api.catalogos.urls')),
 ]

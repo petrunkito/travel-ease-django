@@ -185,6 +185,14 @@ CREATE TABLE Transporte (
     FOREIGN KEY (IdTipoTransporte) REFERENCES TipoTransporte(Id),
 );
 
+CREATE TABLE Destino (
+    Id INT IDENTITY PRIMARY KEY,
+    Ciudad VARCHAR(100) NOT NULL,
+    Pais VARCHAR(100) NOT NULL,
+    Codigo VARCHAR(20) UNIQUE,
+    Activo BIT DEFAULT 1
+);
+
 CREATE TABLE HistorialPrecio (
     Id INT IDENTITY PRIMARY KEY,
     TipoServicio VARCHAR(50), -- Vuelo, Hotel, Transporte
@@ -197,11 +205,13 @@ CREATE TABLE HistorialPrecio (
 CREATE TABLE PaqueteTuristico (
     Id INT IDENTITY PRIMARY KEY,
     IdUsuario INT,
+    IdDestino INT,
     Nombre VARCHAR(100),
     Descripcion VARCHAR(250),
     FechaCreacion DATETIME DEFAULT GETDATE(),
     Activo BIT DEFAULT 1,
-    FOREIGN KEY (IdUsuario) REFERENCES auth_user(Id)--el auth_user(id) es el auth_user de django indicando quien creo este registro
+    FOREIGN KEY (IdUsuario) REFERENCES auth_user(Id),--el auth_user(id) es el auth_user de django indicando quien creo este registro
+    FOREIGN KEY (IdDestino) REFERENCES Destino(Id)
 );
 
 
