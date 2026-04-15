@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'api',
     'api.catalogos.apps.CatalogosConfig',
+    'api.clients.apps.ClientsConfig',
+    'api.services.apps.ServicesConfig',
     'api.users.apps.UsersConfig',
 ]
 

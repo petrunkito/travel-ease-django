@@ -176,6 +176,11 @@ CREATE TABLE TipoTransporte (
     Activo BIT DEFAULT 1
 );
 
+INSERT INTO TipoTransporte (IdDepartamento, Nombre, Codigo) VALUES
+('Taxi', 'TAXI'),
+('Bus', 'BUS'),
+('Metro', 'METRO');
+
 CREATE TABLE Transporte (
     Id INT IDENTITY PRIMARY KEY,
     IdTipoTransporte INT NOT NULL,
