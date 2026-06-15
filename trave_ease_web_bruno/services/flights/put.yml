@@ -1,0 +1,28 @@
+info:
+  name: put
+  type: http
+  seq: 4
+
+http:
+  method: PUT
+  url: http://127.0.0.1:8000/api/services/flights/2/
+  headers:
+    - name: Authorization
+      value: Token f428802f42fdd14f7d1cadc8639af8be4da1e8eb
+  body:
+    type: json
+    data: |-
+      {
+        "airline":"aerosmart edit",
+        "origin":"masaya edit",
+        "destination":"mexino edit",
+        "departure_date":"2026-06-01T10:00:00Z",
+        "arrival_date":"2026-07-01T20:00:00Z"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

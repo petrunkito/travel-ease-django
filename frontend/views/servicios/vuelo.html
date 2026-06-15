@@ -1,0 +1,96 @@
+<div class="servicios-service-content vuelo-content">
+
+    <section class="servicios-card servicios-form-card" aria-labelledby="vuelo-form-title">
+
+        <div class="card-heading">
+            <div>
+                <span class="card-label">Formulario</span>
+                <h3 id="vuelo-form-title">Datos del vuelo</h3>
+            </div>
+        </div>
+
+        <form id="vuelo-form" class="servicios-form" novalidate>
+            <input type="hidden" id="vuelo-id" name="id">
+
+            <div class="field-grid field-grid-two">
+                <label class="field">
+                    <span>Aerolínea</span>
+                    <input type="text" id="vuelo-aerolinea" name="airline" required>
+                </label>
+
+                <label class="field">
+                    <span>Precio</span>
+                    <input type="number" id="vuelo-precio" name="price" min="0" step="0.01" required>
+                </label>
+            </div>
+
+            <div class="field-grid field-grid-two">
+                <label class="field">
+                    <span>Origen</span>
+                    <input type="text" id="vuelo-origen" name="origin" required>
+                </label>
+
+                <label class="field">
+                    <span>Destino</span>
+                    <input type="text" id="vuelo-destino" name="destination" required>
+                </label>
+            </div>
+
+            <div class="field-grid field-grid-two">
+                <label class="field">
+                    <span>Fecha salida</span>
+                    <input type="datetime-local" id="vuelo-fecha-salida" name="departure_date" required>
+                </label>
+
+                <label class="field">
+                    <span>Fecha entrada</span>
+                    <input type="datetime-local" id="vuelo-fecha-entrada" name="arrival_date" required>
+                </label>
+            </div>
+
+            <p class="form-feedback" id="vuelo-form-feedback" role="status" aria-live="polite"></p>
+
+            <div class="button-row button-row-primary">
+                <button type="button" class="action-button primary" id="vuelo-save-button">Agregar</button>
+                <button type="button" class="action-button secondary" id="vuelo-clear-button">Limpiar</button>
+                <button type="button" class="action-button secondary" id="vuelo-edit-button">Actualizar</button>
+            </div>
+
+        </form>
+
+    </section>
+
+    <section class="servicios-card servicios-list-card" aria-labelledby="vuelo-list-title">
+
+        <div class="card-heading">
+            <div>
+                <span class="card-label">Listado</span>
+                <h3 id="vuelo-list-title">Vuelos registrados</h3>
+            </div>
+        </div>
+
+        <div class="table-wrap">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Aerolínea</th>
+                        <th>Origen</th>
+                        <th>Destino</th>
+                        <th>Fecha salida</th>
+                        <th>Fecha entrada</th>
+                        <th>Precio</th>
+                        <th>Editar</th>
+                        <th>Eliminar</th>
+                    </tr>
+                </thead>
+                <tbody id="vuelo-table-body">
+                    <tr>
+                        <td colspan="8" class="empty-state">Cargando vuelos...</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </section>
+
+</div>

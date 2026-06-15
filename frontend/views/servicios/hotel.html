@@ -1,0 +1,82 @@
+<div class="servicios-service-content hotel-content">
+
+    <section class="servicios-card servicios-form-card" aria-labelledby="hotel-form-title">
+
+        <div class="card-heading">
+            <div>
+                <span class="card-label">Formulario</span>
+                <h3 id="hotel-form-title">Datos del hotel</h3>
+            </div>
+        </div>
+
+        <form id="hotel-form" class="servicios-form" novalidate>
+            <input type="hidden" id="hotel-id" name="id">
+
+            <div class="field-grid field-grid-two">
+                <label class="field">
+                    <span>Nombre del hotel</span>
+                    <input type="text" id="hotel-nombre" name="name" required>
+                </label>
+
+                <label class="field">
+                    <span>Ciudad</span>
+                    <input type="text" id="hotel-ciudad" name="city" required>
+                </label>
+            </div>
+
+            <div class="field-grid field-grid-two">
+                <label class="field">
+                    <span>Precio</span>
+                    <input type="number" id="hotel-precio" name="price" min="0" step="0.01" required>
+                </label>
+
+                <label class="field">
+                    <span>Estrellas</span>
+                    <input type="number"  id="hotel-estrellas" name="stars" min="1" max="5" step="1" required>
+                </label>
+            </div>
+
+            <p class="form-feedback" id="hotel-form-feedback" role="status" aria-live="polite"></p>
+
+            <div class="button-row button-row-primary">
+                <button type="button" class="action-button primary" id="hotel-save-button">Agregar</button>
+                <button type="button" class="action-button secondary" id="hotel-reset-button">Limpiar</button>
+                <button type="button" class="action-button secondary" id="hotel-edit-button">Actualizar</button>
+            </div>
+
+        </form>
+
+    </section>
+
+    <section class="servicios-card servicios-list-card" aria-labelledby="hotel-list-title">
+
+        <div class="card-heading">
+            <div>
+                <span class="card-label">Listado</span>
+                <h3 id="hotel-list-title">Hoteles registrados</h3>
+            </div>
+        </div>
+
+        <div class="table-wrap">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Ciudad</th>
+                        <th>Estrellas</th>
+                        <th>Precio</th>
+                        <th>Editar</th>
+                        <th>Eliminar</th>
+                    </tr>
+                </thead>
+                <tbody id="hotel-table-body">
+                    <tr>
+                        <td colspan="5" class="empty-state">Cargando hoteles...</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </section>
+
+</div>

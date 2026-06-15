@@ -1,0 +1,71 @@
+
+-----------
+Id (PK)
+IdPaquete
+IdServicio 
+IdTiempo
+IdUsuario -> Empleado 
+IdDestino 
+IdCliente 
+Cantidad
+PrecioUnitario
+Total
+
+DimServicio --> Tabla nueva, pero aqui hay varios 
+-----------
+IdServicio
+TipoServicio
+Descripcion
+
+
+DimTiempo
+-----------
+IdFecha (PK)
+Fecha
+DiaNombre
+MesNombre
+MesNumero
+Ano
+EsFeriado
+
+
+DimCliente
+-----------
+IdCliente (PK)
+Nombre
+Municipio
+Departamento
+
+
+DimEmpleado
+-----------
+IdUsuario (PK)
+Nombre
+Correo
+Rol
+
+
+DimPaquete
+-----------
+IdPaquete (PK)
+Nombre
+Descripcion
+
+
+DimDestino
+-----------
+IdDestino (PK)
+Ciudad
+Pais
+
+
+                DimFecha
+                   |
+DimCliente — FactVentas — DimUsuario
+                   |
+               DimPaquete
+                   |
+               DimDestino
+                   |
+               DimServicio
+

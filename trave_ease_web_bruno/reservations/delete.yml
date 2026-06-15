@@ -1,0 +1,18 @@
+info:
+  name: delete
+  type: http
+  seq: 8
+
+http:
+  method: DELETE
+  url: http://127.0.0.1:8000/api/reservations/reservations/13/
+  headers:
+    - name: Authorization
+      value: Token f428802f42fdd14f7d1cadc8639af8be4da1e8eb
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

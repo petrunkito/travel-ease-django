@@ -1,0 +1,7 @@
+info:
+  name: type_transport
+  type: folder
+  seq: 3
+
+request:
+  auth: inherit

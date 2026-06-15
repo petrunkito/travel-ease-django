@@ -1,0 +1,36 @@
+info:
+  name: path
+  type: http
+  seq: 4
+
+http:
+  method: PATCH
+  url: http://127.0.0.1:8000/api/packages/4/
+  headers:
+    - name: Authorization
+      value: Token f428802f42fdd14f7d1cadc8639af8be4da1e8eb
+  body:
+    type: json
+    data: |-
+      {
+        "destination": {
+          "city": "Barcelona",
+          "country": "España"
+        },
+        "name": "Viaje Barcelona",
+        "description": "Paquete ajustado",
+        "details": [
+          {
+            "service_type": "Hotel",
+            "service_id": 9,
+            "quantity": 4
+          }
+        ]
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

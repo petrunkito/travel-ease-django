@@ -1,0 +1,26 @@
+info:
+  name: path
+  type: http
+  seq: 5
+
+http:
+  method: PATCH
+  url: http://127.0.0.1:8000/api/services/transportation/2/
+  headers:
+    - name: Authorization
+      value: Token f428802f42fdd14f7d1cadc8639af8be4da1e8eb
+  body:
+    type: json
+    data: |-
+      {
+        "type_transport":1, 
+        "origin":"Aeropuert edit",
+        "destination":"Hotel edit"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

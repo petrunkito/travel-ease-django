@@ -1,0 +1,113 @@
+<section class="page clientes-page">
+
+    <div class="clientes-shell">
+        <div>
+
+            <button id="testtest">Test</button>
+        </div>
+        <div class="clientes-layout">
+
+            <section class="clientes-card clientes-form-card" aria-labelledby="clientes-form-title">
+
+                <div class="card-heading">
+                    <div>
+                        <span class="card-label">Formulario</span>
+                        <h3 id="clientes-form-title">Datos del cliente</h3>
+                    </div>
+                </div>
+
+                <form id="cliente-form" class="clientes-form" novalidate>
+                    <input type="hidden" id="cliente-id" name="id">
+
+                    <div class="field-grid field-grid-two">
+                        <label class="field">
+                            <span>Departamento</span>
+                            <select id="departamento" name="department" required>
+                                <option value="">Seleccione un departamento</option>
+                            </select>
+                        </label>
+
+                        <label class="field">
+                            <span>Municipio</span>
+                            <select id="municipio" name="municipality" required>
+                                <option value="">Seleccione un municipio</option>
+                            </select>
+                        </label>
+                    </div>
+
+                    <div class="field-grid field-grid-two">
+                        <label class="field">
+                            <span>Nombre completo del cliente</span>
+                            <input type="text" id="nombre" name="name" autocomplete="name" required>
+                        </label>
+
+                        <label class="field">
+                            <span>Cédula o DNI</span>
+                            <input type="text" id="cedula" name="dni" autocomplete="off" required>
+                        </label>
+                    </div>
+
+                    <div class="field-grid field-grid-two">
+                        <label class="field field-span-2">
+                            <span>Dirección</span>
+                            <input type="text" id="direccion" name="address" autocomplete="street-address" required>
+                        </label>
+                    </div>
+
+                    <div class="field-grid field-grid-two">
+                        <label class="field">
+                            <span>Número de teléfono</span>
+                            <input type="tel" id="telefono" name="phone" autocomplete="tel" required>
+                        </label>
+                    </div>
+
+                    <p class="form-feedback" id="cliente-form-feedback" role="status" aria-live="polite"></p>
+
+                    <div class="button-row button-row-primary">
+                        <button type="button" class="action-button primary" id="cliente-save-button">Agregar</button>
+                        <button type="button" class="action-button secondary" id="cliente-reset-button">Limpiar</button>
+                        <button type="button" class="action-button secondary"
+                            id="cliente-edit-button">Actualizar</button>
+                    </div>
+
+                </form>
+
+            </section>
+
+            <section class="clientes-card clientes-list-card" aria-labelledby="clientes-list-title">
+
+                <div class="card-heading">
+                    <div>
+                        <span class="card-label">Listado</span>
+                        <h3 id="clientes-list-title">Clientes registrados</h3>
+                    </div>
+                    <button type="button" class="inline-button" id="clientes-refresh-button">Actualizar lista</button>
+                </div>
+
+                <div class="table-wrap">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Cédula</th>
+                                <th>Dirección</th>
+                                <th>Teléfono</th>
+                                <th>Municipio</th>
+                                <th>Acción</th>
+                            </tr>
+                        </thead>
+                        <tbody id="clientes-table-body">
+                            <tr>
+                                <td colspan="7" class="empty-state">Cargando clientes...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </section>
+
+        </div>
+
+    </div>
+
+</section>

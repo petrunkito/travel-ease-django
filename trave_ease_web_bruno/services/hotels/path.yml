@@ -1,0 +1,27 @@
+info:
+  name: path
+  type: http
+  seq: 5
+
+http:
+  method: PATCH
+  url: http://127.0.0.1:8000/api/services/hotels/1/
+  headers:
+    - name: Authorization
+      value: Token f428802f42fdd14f7d1cadc8639af8be4da1e8eb
+  body:
+    type: json
+    data: |-
+      {
+          "name": "holey din edit",
+          "city": "managua edit",
+          "stars": 4,
+          "category": "categoria edit"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

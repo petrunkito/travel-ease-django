@@ -1,0 +1,39 @@
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+:root {
+	--bg-start: #eef2f9;
+	--bg-end: #f7f9ff;
+	--primary: #2f6bff;
+	--primary-dark: #2456cc;
+	--text-main: #1c2230;
+	--text-muted: #6a7387;
+	--panel: #ffffff;
+	--card: #ffffff;
+	--border: #e4e9f4;
+	--shadow: 0 18px 40px rgba(35, 53, 94, 0.12);
+	--shadow-soft: 0 14px 28px rgba(35, 53, 94, 0.08);
+}
+
+body {
+	min-height: 100vh;
+	background: linear-gradient(120deg, var(--bg-start), var(--bg-end));
+	color: var(--text-main);
+	font-family: "Trebuchet MS", "Gill Sans", "Segoe UI", sans-serif;
+	letter-spacing: 0.2px;
+}
+
+img {
+	max-width: 100%;
+	display: block;
+}
+
+button {
+	font-family: inherit;
+	border: none;
+	background: none;
+	cursor: pointer;
+}

@@ -1,0 +1,24 @@
+info:
+  name: put
+  type: http
+  seq: 4
+
+http:
+  method: PUT
+  url: http://127.0.0.1:8000/api/catalogos/services/3/
+  headers:
+    - name: Authorization
+      value: Token 36b5a27f2589458a4daff97315c95039638b6d46
+  body:
+    type: json
+    data: |-
+      {
+        "name":"otro2"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

@@ -1,0 +1,28 @@
+info:
+  name: post
+  type: http
+  seq: 5
+
+http:
+  method: POST
+  url: http://127.0.0.1:8000/api/reservations/reservations/
+  headers:
+    - name: Authorization
+      value: Token f428802f42fdd14f7d1cadc8639af8be4da1e8eb
+  body:
+    type: json
+    data: |
+      {
+          "client_id": 4,
+        "package_id": 35,
+        "payment_type_id": 1,
+        "seller_user_id": 1,
+        "status_id":3
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

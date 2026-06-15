@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>TravelEase | Login</title>
+
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/login.css">
+</head>
+
+<body>
+
+    <main class="login-shell">
+
+        <section class="login-card">
+
+            <div class="login-brand">
+                <div class="login-icon" aria-hidden="true">
+                    <img src="assets/images/plane.png" alt="" />
+                </div>
+                <div class="login-text">
+                    <span class="login-brand-name">TRAVELEASE</span>
+                    <h1>Inicia sesion</h1>
+                    <p>Accede al panel de gestion turistica con tus credenciales.</p>
+                </div>
+            </div>
+
+            <form class="login-form" id="login-form">
+                <label class="field">
+                    <span>Usuario</span>
+                    <input type="text" name="username" autocomplete="username" required>
+                </label>
+
+                <label class="field">
+                    <span>Contrasena</span>
+                    <input type="password" name="password" autocomplete="current-password" required>
+                </label>
+
+                <p class="form-error" id="login-error" role="alert" aria-live="polite"></p>
+
+                <button class="login-button" type="submit">
+                    Iniciar sesion
+                </button>
+            </form>
+
+        </section>
+
+        <aside class="login-panel" aria-hidden="true">
+            <div class="panel-content">
+                <h2>Gestion completa</h2>
+                <p>
+                    Controla reservas, paquetes y clientes desde un unico lugar.
+                </p>
+            </div>
+        </aside>
+
+    </main>
+
+    <script type="module" src="js/login.js"></script>
+
+</body>
+
+</html>

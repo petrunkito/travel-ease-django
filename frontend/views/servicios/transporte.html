@@ -1,0 +1,87 @@
+<div class="servicios-service-content transporte-content">
+
+    <section class="servicios-card servicios-form-card" aria-labelledby="transporte-form-title">
+
+        <div class="card-heading">
+            <div>
+                <span class="card-label">Formulario</span>
+                <h3 id="transporte-form-title">Datos del transporte</h3>
+            </div>
+        </div>
+
+        <form id="transporte-form" class="servicios-form" novalidate>
+            <input type="hidden" id="transporte-id" name="id">
+
+            <div class="field-grid field-grid-two">
+                <label class="field">
+                    <span>Tipo transporte</span>
+                    <select id="transporte-tipo" name="type" required>
+                        <option value="">Seleccione un tipo</option>
+                    </select>
+                </label>
+
+            </div>
+
+            <div class="field-grid field-grid-two">
+                <label class="field">
+                    <span>Origen</span>
+                    <input type="text" id="transporte-origen" name="origin" required>
+                </label>
+
+                <label class="field">
+                    <span>Destino</span>
+                    <input type="text" id="transporte-destino" name="destination" required>
+                </label>
+            </div>
+
+            <div class="field-grid field-grid-two">
+                <label class="field">
+                    <span>Precio</span>
+                    <input type="number" id="transporte-precio" name="price" min="0" step="0.01" required>
+                </label>
+            </div>
+
+            <p class="form-feedback" id="transporte-form-feedback" role="status" aria-live="polite"></p>
+
+            <div class="button-row button-row-primary">
+                <button type="button" class="action-button primary" id="transporte-save-button">Agregar</button>
+                <button type="button" class="action-button secondary" id="transporte-reset-button">Limpiar</button>
+                <button type="button" class="action-button secondary" id="transporte-edit-button">Actualizar</button>
+            </div>
+
+        </form>
+
+    </section>
+
+    <section class="servicios-card servicios-list-card" aria-labelledby="transporte-list-title">
+
+        <div class="card-heading">
+            <div>
+                <span class="card-label">Listado</span>
+                <h3 id="transporte-list-title">Transportes registrados</h3>
+            </div>
+        </div>
+
+        <div class="table-wrap">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Tipo transporte</th>
+                        <th>Origen</th>
+                        <th>Destino</th>
+                        <th>Precio</th>
+                        <th>Editar</th>
+                        <th>Eliminar</th>
+                    </tr>
+                </thead>
+                <tbody id="transporte-table-body">
+                    <tr>
+                        <td colspan="6" class="empty-state">Cargando transportes...</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </section>
+
+</div>

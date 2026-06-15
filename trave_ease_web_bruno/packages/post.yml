@@ -1,0 +1,51 @@
+info:
+  name: post
+  type: http
+  seq: 3
+
+http:
+  method: POST
+  url: http://127.0.0.1:8000/api/packages/
+  headers:
+    - name: Authorization
+      value: Token f428802f42fdd14f7d1cadc8639af8be4da1e8eb
+  body:
+    type: json
+    data: |-
+      {
+        "destination": {
+          "city": "Madrid",
+          "country": "España"
+        },
+        "name": "Viaje Madrid",
+        "description": "Paquete completo con vuelo, hotel y transporte",
+        "details": [
+          {
+            "service_type": "Vuelo",
+            "service_id": 13,
+            "quantity": 1
+          },
+             {
+            "service_type": "Vuelo",
+            "service_id": 13,
+            "quantity": 1
+          },
+          {
+            "service_type": "Hotel",
+            "service_id": 9,
+            "quantity": 2
+          },
+          {
+            "service_type": "Transporte",
+            "service_id": 6,
+            "quantity": 1
+          }
+        ]
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

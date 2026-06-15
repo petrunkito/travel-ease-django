@@ -1,0 +1,35 @@
+info:
+  name: path
+  type: http
+  seq: 4
+
+http:
+  method: PATCH
+  url: http://127.0.0.1:8000/api/clients/2/
+  headers:
+    - name: Authorization
+      value: Token f428802f42fdd14f7d1cadc8639af8be4da1e8eb
+  body:
+    type: json
+    data: " {
+
+      \    \"municipality\": 39,
+
+      \    \"name\": \"Mala ayu edit\",
+
+      \    \"national_id\": \"001-08010edit\",
+
+      \    \"address\": \"la mera comarca edit\",
+
+      \    \"phone_number\": \"628970159891 edit\"
+
+      \  }
+
+      \  "
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

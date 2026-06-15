@@ -1,0 +1,235 @@
+<section class="page paquetes-page">
+
+    <div class="paquetes-shell">
+
+        <div class="paquetes-layout">
+
+            <!-- FORMULARIO IZQUIERDO (ROJO) -->
+            <section class="paquetes-card paquetes-form-card" aria-labelledby="paquetes-form-title">
+
+                <div class="card-heading">
+                    <div>
+                        <span class="card-label">Formulario</span>
+                        <h3 id="paquetes-form-title">Crear Paquete Turístico</h3>
+                    </div>
+                </div>
+
+                <form id="paquete-form" class="paquetes-form" novalidate>
+                    <input type="hidden" id="paquete-id" name="id">
+
+                    <div class="field-grid field-grid-two">
+                        <label class="field field-span-2">
+                            <span>Título del paquete</span>
+                            <input type="text" id="titulo" value="Titulo" name="title" placeholder="Ej: Tour Madrid Clásico" required>
+                        </label>
+                    </div>
+
+                    <div class="field-grid field-grid-two">
+                        <label class="field field-span-2">
+                            <span>Descripción</span>
+                            <textarea id="descripcion"  name="description" placeholder="Descripción detallada del paquete..." rows="4" required>Descripcion</textarea>
+                        </label>
+                    </div>
+
+                    <div class="field-grid field-grid-two">
+                        <label class="field">
+                            <span>País</span>
+                            <input type="text" id="pais" value="País" name="country" placeholder="Ej: España" required>
+                        </label>
+
+                        <label class="field">
+                            <span>Ciudad</span>
+                            <input type="text" id="ciudad" value="Ciudad" name="city" placeholder="Ej: Madrid" required>
+                        </label>
+                    </div>
+
+                    <p class="form-feedback" id="paquete-form-feedback" role="status" aria-live="polite"></p>
+
+                    <div class="button-row button-row-primary">
+                        <button type="button" class="action-button primary" id="paquete-save-button">Agregar</button>
+                        <button type="button" class="action-button secondary" id="paquete-reset-button">Limpiar</button>
+                        <button type="button" class="action-button secondary" id="paquete-edit-button">Actualizar</button>
+                    </div>
+
+                </form>
+
+            </section>
+
+            <!-- PANEL DERECHO -->
+            <div class="paquetes-right-panel">
+
+                <!-- DETALLES DEL PAQUETE (AZUL) -->
+                <section class="paquetes-card paquetes-details-card" aria-labelledby="paquetes-details-title">
+
+                    <div class="card-heading">
+                        <div>
+                            <span class="card-label">Detalles</span>
+                            <h3 id="paquetes-details-title">Servicios del paquete</h3>
+                        </div>
+                    </div>
+
+                    <div class="table-wrap">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Detalle</th>
+                                    <th>Precio</th>
+                                    <th>Cantidad</th>
+                                    <th>Total</th>
+                                    <th>Tipo de servicio</th>
+                                    <th>Acción</th>
+                                </tr>
+                            </thead>
+                            <tbody id="paquete-services-tbody">
+                                <tr class="empty-state-row">
+                                    <td colspan="6" class="empty-state">Selecciona servicios para agregarlos al paquete</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="details-footer">
+                        <p class="total-label">Total: <span id="paquete-total">0</span></p>
+                    </div>
+
+                </section>
+
+                <!-- SERVICIOS DISPONIBLES (VERDE) -->
+                <div class="paquetes-services-contaidner">
+
+                    <!-- VUELOS -->
+                    <section class="paquetes-card paquetes-service-card" aria-labelledby="vuelos-title">
+
+                        <div class="card-heading">
+                            <div>
+                                <span class="card-label">Vuelos</span>
+                                <h3 id="vuelos-title">Vuelos disponibles</h3>
+                            </div>
+                        </div>
+
+                        <div class="table-wrap">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Aerolínea</th>
+                                        <th>Destino</th>
+                                        <th>Precio</th>
+                                        <th>Cantidad</th>
+                                        <th>Acción</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="vuelos-tbody">
+                                    <tr class="empty-state-row">
+                                        <td colspan="5" class="empty-state">No hay vuelos disponibles</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </section>
+
+                    <!-- HOTELES -->
+                    <section class="paquetes-card paquetes-service-card" aria-labelledby="hoteles-title">
+
+                        <div class="card-heading">
+                            <div>
+                                <span class="card-label">Hoteles</span>
+                                <h3 id="hoteles-title">Hoteles disponibles</h3>
+                            </div>
+                        </div>
+
+                        <div class="table-wrap">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Nombre</th>
+                                        <th>Ciudad</th>
+                                        <th>Precio</th>
+                                        <th>Cantidad</th>
+                                        <th>Acción</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="hoteles-tbody">
+                                    <tr class="empty-state-row">
+                                        <td colspan="5" class="empty-state">No hay hoteles disponibles</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </section>
+
+                    <!-- TRANSPORTES -->
+                    <section class="paquetes-card paquetes-service-card" aria-labelledby="transportes-title">
+
+                        <div class="card-heading">
+                            <div>
+                                <span class="card-label">Transporte</span>
+                                <h3 id="transportes-title">Transportes disponibles</h3>
+                            </div>
+                        </div>
+
+                        <div class="table-wrap">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Nombre</th>
+                                        <th>Destino</th>
+                                        <th>Precio</th>
+                                        <th>Cantidad</th>
+                                        <th>Acción</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="transportes-tbody">
+                                    <tr class="empty-state-row">
+                                        <td colspan="5" class="empty-state">No hay transportes disponibles</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </section>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- LISTADO DE PAQUETES (ROSA/MORADO) -->
+        <section class="paquetes-card paquetes-list-card" aria-labelledby="paquetes-list-title">
+
+            <div class="card-heading">
+                <div>
+                    <span class="card-label">Listado</span>
+                    <h3 id="paquetes-list-title">Paquetes turísticos registrados</h3>
+                </div>
+                <button type="button" class="inline-button" id="paquetes-refresh-button">Actualizar lista</button>
+            </div>
+
+            <div class="table-wrap">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Título</th>
+                            <th>Descripción</th>
+                            <th>País</th>
+                            <th>Ciudad</th>
+                            <th>Total</th>
+                            <th>Editar</th>
+                            <th>Desactivar</th>
+                        </tr>
+                    </thead>
+                    <tbody id="paquetes-table-body">
+                        <tr class="empty-state-row">
+                            <td colspan="6" class="empty-state">No hay paquetes registrados</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </section>
+
+    </div>
+
+</section>

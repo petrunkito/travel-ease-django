@@ -1,0 +1,158 @@
+<section class="page reservas-page">
+
+    <div class="reservas-shell">
+
+        <div class="reservas-layout">
+
+            <!-- PANEL IZQUIERDO (AZUL) - LISTAS DE CLIENTES Y PAQUETES -->
+            <section class="reservas-card reservas-selection-card" aria-labelledby="reservas-selection-title">
+
+                <div class="card-heading">
+                    <div>
+                        <span class="card-label">Selección</span>
+                        <h3 id="reservas-selection-title">Clientes y Paquetes</h3>
+                    </div>
+                </div>
+
+                <!-- TABLA DE CLIENTES -->
+                <div class="selection-section">
+                    <h4 class="selection-subtitle">Clientes:</h4>
+                    <div class="table-wrap table-selection">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Cédula</th>
+                                    <th>Dirección</th>
+                                </tr>
+                            </thead>
+                            <tbody id="clientes-list-tbody">
+                                <tr class="empty-state-row">
+                                    <td colspan="4" class="empty-state">Cargando clientes...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- TABLA DE PAQUETES -->
+                <div class="selection-section">
+                    <h4 class="selection-subtitle">Paquetes:</h4>
+                    <div class="table-wrap table-selection">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Título</th>
+                                    <th>Descripción</th>
+                                    <th>Precio</th>
+                                </tr>
+                            </thead>
+                            <tbody id="paquetes-list-tbody">
+                                <tr class="empty-state-row">
+                                    <td colspan="4" class="empty-state">Cargando paquetes...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </section>
+
+            <!-- PANEL DERECHO (ROSADO) - PREVISUALIZACIÓN Y DETALLES -->
+            <section class="reservas-card reservas-preview-card" aria-labelledby="reservas-preview-title">
+
+                <div class="card-heading">
+                    <div>
+                        <span class="card-label">Detalles</span>
+                        <h3 id="reservas-preview-title">Detalles de la Reserva</h3>
+                    </div>
+                </div>
+
+                <div class="preview-content">
+
+                    <!-- CLIENTE PREVIEW -->
+                    <div class="preview-section">
+                        <h4 class="preview-label">Cliente</h4>
+                        <div class="preview-info-block" id="cliente-preview-block">
+                            <p class="preview-placeholder">Selecciona un cliente</p>
+                        </div>
+                    </div>
+                    
+
+                    <!-- PAQUETE PREVIEW -->
+                    <div class="preview-section">
+                        <h4 class="preview-label">Paquete turístico</h4>
+                        <div class="preview-info-block" id="paquete-preview-block">
+                            <p class="preview-placeholder">Selecciona un paquete</p>
+                        </div>
+                    </div>
+
+                     <!-- Estado reserva -->
+                    <div class="preview-section">
+                        <label class="field">
+                            <span>Estado de la Reserva</span>
+                            <select id="estado-reserva" name="status" class="status-select">
+                            </select>
+                        </label>
+                    </div>
+                    
+
+                    <!-- Tipo de pago -->
+
+                    <div class="preview-section">
+                        <label class="field">
+                            <span>Tipo de pago</span>
+                            <select id="tipo-pago" name="status" class="status-select">
+                                <option value=''>Seleccione un tipo de pago</option>
+                                <option value="1">Efectivo</option>
+                            </select>
+                        </label>
+                    </div>
+                   
+                    <!-- BOTONES -->
+                    <div class="button-row button-row-preview">
+                        <button type="button" class="action-button primary" id="reserva-add-button">Agregar</button>
+                        <button type="button" class="action-button secondary" id="reserva-reset-button">Limpiar</button>
+                        <button type="button" class="action-button secondary" id="reserva-update-button">Actualizar</button>
+                    </div>
+
+                </div>
+
+            </section>
+
+        </div>
+
+        <!-- TABLA DE RESERVAS (VERDE) -->
+        <section class="reservas-card reservas-list-card" aria-labelledby="reservas-list-title">
+
+            <div class="card-heading">
+                <div>
+                    <span class="card-label">Listado</span>
+                    <h3 id="reservas-list-title">Reservas Realizadas</h3>
+                </div>
+            </div>
+
+            <div class="table-wrap">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Cliente</th>
+                            <th>Paquete turístico</th>
+                            <th>Precio</th>
+                            <th>Estado reserva</th>
+                            <th>Editar</th>
+                        </tr>
+                    </thead>
+                    <tbody id="reservas-table-body">
+                        <tr class="empty-state-row">
+                            <td colspan="5" class="empty-state">No hay reservas registradas</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </section>
+
+    </div>
+
+</section>

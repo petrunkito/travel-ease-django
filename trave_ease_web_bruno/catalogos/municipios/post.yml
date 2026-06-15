@@ -1,0 +1,23 @@
+info:
+  name: post
+  type: http
+  seq: 2
+
+http:
+  method: POST
+  url: http://127.0.0.1:8000/api/catalogos/municipios/
+  body:
+    type: json
+    data: |-
+      {
+        "department": 1,
+        "name": "Municipio Nuevo",
+        "code": "MA-99"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

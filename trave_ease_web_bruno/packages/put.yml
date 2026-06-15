@@ -1,0 +1,42 @@
+info:
+  name: put
+  type: http
+  seq: 5
+
+http:
+  method: PUT
+  url: http://127.0.0.1:8000/api/packages/1/
+  headers:
+    - name: Authorization
+      value: Token f428802f42fdd14f7d1cadc8639af8be4da1e8eb
+  body:
+    type: json
+    data: |-
+      {
+        "destination": {
+          "city": "Barcelona",
+          "country": "España"
+        },
+        "name": "Viaje Barcelona",
+        "description": "Paquete ajustado",
+        "details": [
+          {
+            "id":7,//aqui editamos los registros del DetallePaquete por eso '7' pertence a uno de esos registros
+            "service_type": "Hotel",
+            "service_id": 1,
+            "quantity": 4
+          },
+          {
+            "service_type": "Transporte",
+            "service_id": 1,
+            "quantity": 1
+          }
+        ]
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

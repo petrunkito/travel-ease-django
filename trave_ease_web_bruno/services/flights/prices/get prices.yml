@@ -1,0 +1,18 @@
+info:
+  name: get prices
+  type: http
+  seq: 7
+
+http:
+  method: GET
+  url: http://127.0.0.1:8000/api/services/flights/12/prices/
+  headers:
+    - name: Authorization
+      value: Token f428802f42fdd14f7d1cadc8639af8be4da1e8eb
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

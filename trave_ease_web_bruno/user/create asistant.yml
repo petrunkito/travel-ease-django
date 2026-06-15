@@ -1,0 +1,26 @@
+info:
+  name: create asistant
+  type: http
+  seq: 2
+
+http:
+  method: POST
+  url: http://127.0.0.1:8000/api/users/employees/
+  headers:
+    - name: Authorization
+      value: Token edcfeb23dba4d2d8fa002075bf2f8619d457b125
+  body:
+    type: json
+    data: |-
+      {
+      "username": "asistente",
+      "email": "asistente1@travelease.com",
+      "password": "12345678"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

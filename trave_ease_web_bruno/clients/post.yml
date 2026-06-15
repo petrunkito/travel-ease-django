@@ -1,0 +1,28 @@
+info:
+  name: post
+  type: http
+  seq: 3
+
+http:
+  method: POST
+  url: http://127.0.0.1:8000/api/clients/
+  headers:
+    - name: Authorization
+      value: Token f428802f42fdd14f7d1cadc8639af8be4da1e8eb
+  body:
+    type: json
+    data: |-
+      {
+      "municipality": 10,
+      "name": "Carlo Manrique",
+      "national_id": "001-020202-0002B",
+      "address": "Irac",
+      "phone_number": "54365434"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

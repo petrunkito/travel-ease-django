@@ -1,0 +1,28 @@
+info:
+  name: update reserva
+  type: http
+  seq: 7
+
+http:
+  method: PUT
+  url: http://127.0.0.1:8000/api/reservations/reservations/7/
+  headers:
+    - name: Authorization
+      value: Token f428802f42fdd14f7d1cadc8639af8be4da1e8eb
+  body:
+    type: json
+    data: |-
+      {
+        "client": 59,
+        "payment_type": 1,
+        "seller_user": 1,
+        "package_id":36,
+        ""
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
