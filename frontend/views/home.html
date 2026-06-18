@@ -1,22 +1,95 @@
 <section class="page home-page">
 
-    <div class="home-stage">
+    <div class="dashboard-hero">
 
-        <div class="welcome-card">
-
-            <div class="welcome-icon" aria-hidden="true">
-                <img src="assets/images/plane.png" alt="" />
-            </div>
-
-            <h2>
-                Bienvenido al sistema
-            </h2>
-
+        <div>
+            <span class="dashboard-kicker">Warehouse tur&iacute;stico</span>
+            <h2>Resumen de ventas y reservas</h2>
             <p>
-                Gestiona tus paquetes turísticos de manera segura
+                Indicadores principales desde el data warehouse para revisar destinos, clientes,
+                paquetes y temporadas con mayor movimiento.
             </p>
-
         </div>
+
+        <div class="dashboard-icon" aria-hidden="true">
+            <img src="assets/images/plane.png" alt="" />
+        </div>
+
+    </div>
+
+    <div id="dashboard-status" class="dashboard-status">
+        Cargando indicadores del warehouse...
+    </div>
+
+    <div class="dashboard-grid" aria-label="Graficos del warehouse">
+
+        <article class="chart-card">
+            <div class="chart-card-header">
+                <div>
+                    <span class="chart-eyebrow">Ingresos</span>
+                    <h3>Ingresos por destino</h3>
+                </div>
+                <strong id="income-total">$0.00</strong>
+            </div>
+            <p class="chart-description">
+                Compara los destinos que generan m&aacute;s ingresos por pa&iacute;s y ciudad.
+            </p>
+            <div class="chart-frame">
+                <canvas id="income-destination-chart"></canvas>
+            </div>
+            <ul id="income-destination-detail" class="chart-detail-list"></ul>
+        </article>
+
+        <article class="chart-card">
+            <div class="chart-card-header">
+                <div>
+                    <span class="chart-eyebrow">Clientes</span>
+                    <h3>Top clientes</h3>
+                </div>
+                <strong id="clients-total">$0.00</strong>
+            </div>
+            <p class="chart-description">
+                Muestra los clientes con mayor monto comprado en reservas tur&iacute;sticas.
+            </p>
+            <div class="chart-frame">
+                <canvas id="top-clients-chart"></canvas>
+            </div>
+            <ul id="top-clients-detail" class="chart-detail-list"></ul>
+        </article>
+
+        <article class="chart-card">
+            <div class="chart-card-header">
+                <div>
+                    <span class="chart-eyebrow">Reservas</span>
+                    <h3>Paquetes m&aacute;s vendidos</h3>
+                </div>
+                <strong id="packages-total">0</strong>
+            </div>
+            <p class="chart-description">
+                Identifica los paquetes con mayor cantidad de reservas registradas.
+            </p>
+            <div class="chart-frame">
+                <canvas id="top-packages-chart"></canvas>
+            </div>
+            <ul id="top-packages-detail" class="chart-detail-list"></ul>
+        </article>
+
+        <article class="chart-card">
+            <div class="chart-card-header">
+                <div>
+                    <span class="chart-eyebrow">Temporada</span>
+                    <h3>Temporada alta</h3>
+                </div>
+                <strong id="season-total">$0.00</strong>
+            </div>
+            <p class="chart-description">
+                Ordena los meses con mayor volumen de ventas para detectar picos de demanda.
+            </p>
+            <div class="chart-frame">
+                <canvas id="high-season-chart"></canvas>
+            </div>
+            <ul id="high-season-detail" class="chart-detail-list"></ul>
+        </article>
 
     </div>
 
