@@ -8,7 +8,7 @@ http:
   url: http://127.0.0.1:8000/api/users/employees/
   headers:
     - name: Authorization
-      value: Token edcfeb23dba4d2d8fa002075bf2f8619d457b125
+      value: Token 9900315eb6d822d7ad845a045f4b29549a198e62
   body:
     type: json
     data: |-
