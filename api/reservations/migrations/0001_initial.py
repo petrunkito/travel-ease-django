@@ -19,9 +19,8 @@ class Migration(migrations.Migration):
             name='PaymentType',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=50)),
-                ('code', models.CharField(max_length=20, unique=True)),
-                ('active', models.BooleanField(default=True)),
+                ('name', models.CharField(db_column='Nombre', max_length=50)),
+                ('code', models.CharField(db_column='Codigo', max_length=20, unique=True)),
             ],
             options={
                 'verbose_name': 'Tipo de Pago',
@@ -33,8 +32,8 @@ class Migration(migrations.Migration):
             name='ReservationStatus',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=50)),
-                ('code', models.CharField(max_length=20, unique=True)),
+                ('name', models.CharField(db_column='Nombre', max_length=50)),
+                ('code', models.CharField(db_column='Codigo', max_length=20, unique=True)),
             ],
             options={
                 'verbose_name': 'Estado de Reserva',
@@ -46,12 +45,12 @@ class Migration(migrations.Migration):
             name='Reservation',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('date', models.DateTimeField(auto_now_add=True)),
-                ('total', models.DecimalField(decimal_places=2, max_digits=10)),
-                ('active', models.BooleanField(default=True)),
-                ('client', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, related_name='reservations', to='clients.client')),
-                ('payment_type', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to='reservations.paymenttype')),
-                ('seller_user', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, related_name='reservations_sold', to=settings.AUTH_USER_MODEL)),
+                ('date', models.DateTimeField(auto_now_add=True, db_column='Fecha')),
+                ('total', models.DecimalField(db_column='Total', decimal_places=2, max_digits=10)),
+                ('active', models.BooleanField(db_column='Activo', default=True)),
+                ('client', models.ForeignKey(db_column='IdCliente', on_delete=django.db.models.deletion.PROTECT, related_name='reservations', to='clients.client')),
+                ('payment_type', models.ForeignKey(db_column='IdTipoPago', on_delete=django.db.models.deletion.PROTECT, to='reservations.paymenttype')),
+                ('seller_user', models.ForeignKey(db_column='IdUsuarioVendedor', on_delete=django.db.models.deletion.PROTECT, related_name='reservations_sold', to=settings.AUTH_USER_MODEL)),
             ],
             options={
                 'verbose_name': 'Reserva',
@@ -63,10 +62,10 @@ class Migration(migrations.Migration):
             name='Invoice',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('invoice_number', models.CharField(max_length=50)),
-                ('issue_date', models.DateTimeField(auto_now_add=True)),
-                ('total', models.DecimalField(decimal_places=2, max_digits=10)),
-                ('reservation', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, related_name='invoice', to='reservations.reservation')),
+                ('invoice_number', models.CharField(db_column='NumeroFactura', max_length=50)),
+                ('issue_date', models.DateTimeField(auto_now_add=True, db_column='FechaEmision')),
+                ('total', models.DecimalField(db_column='Total', decimal_places=2, max_digits=10)),
+                ('reservation', models.OneToOneField(db_column='IdReserva', on_delete=django.db.models.deletion.CASCADE, related_name='invoice', to='reservations.reservation')),
             ],
             options={
                 'verbose_name': 'Factura',
@@ -78,13 +77,13 @@ class Migration(migrations.Migration):
             name='ReservationDetail',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('package_id', models.IntegerField(blank=True, null=True)),
-                ('service_type', models.CharField(choices=[('VUELO', 'Vuelo'), ('HOTEL', 'Hotel'), ('TRANSPORTE', 'Transporte')], max_length=50)),
-                ('service_id', models.IntegerField()),
-                ('quantity', models.IntegerField()),
-                ('unit_price', models.DecimalField(decimal_places=2, max_digits=10)),
-                ('total', models.DecimalField(decimal_places=2, max_digits=10)),
-                ('reservation', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='details', to='reservations.reservation')),
+                ('package_id', models.IntegerField(blank=True, db_column='IdPaquete', null=True)),
+                ('service_type', models.CharField(choices=[('VUELO', 'Vuelo'), ('HOTEL', 'Hotel'), ('TRANSPORTE', 'Transporte')], db_column='TipoServicio', max_length=50)),
+                ('service_id', models.IntegerField(db_column='IdServicio')),
+                ('quantity', models.IntegerField(db_column='Cantidad')),
+                ('unit_price', models.DecimalField(db_column='PrecioUnitario', decimal_places=2, max_digits=10)),
+                ('total', models.DecimalField(db_column='Total', decimal_places=2, max_digits=10)),
+                ('reservation', models.ForeignKey(db_column='IdReserva', on_delete=django.db.models.deletion.CASCADE, related_name='details', to='reservations.reservation')),
             ],
             options={
                 'verbose_name': 'Detalle de Reserva',
@@ -96,9 +95,9 @@ class Migration(migrations.Migration):
             name='ReservationStatusHistory',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('date', models.DateTimeField(auto_now_add=True)),
-                ('reservation', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='status_history', to='reservations.reservation')),
-                ('status', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to='reservations.reservationstatus')),
+                ('date', models.DateTimeField(auto_now_add=True, db_column='Fecha')),
+                ('reservation', models.ForeignKey(db_column='IdReserva', on_delete=django.db.models.deletion.CASCADE, related_name='status_history', to='reservations.reservation')),
+                ('status', models.ForeignKey(db_column='IdEstado', on_delete=django.db.models.deletion.PROTECT, to='reservations.reservationstatus')),
             ],
             options={
                 'verbose_name': 'Historial Estado Reserva',

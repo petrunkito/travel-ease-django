@@ -8,13 +8,13 @@ http:
   url: http://127.0.0.1:8000/api/catalogos/type-transports/
   headers:
     - name: Authorization
-      value: Token f428802f42fdd14f7d1cadc8639af8be4da1e8eb
+      value: Token 1a30606d73935080b8476b00db62ade847179f40
   body:
     type: json
     data: |-
       {
-        "name": "Bus",
-        "code": "BUS"
+        "name": "Tren",
+        "code": "TREN"
       }
   auth: inherit
 

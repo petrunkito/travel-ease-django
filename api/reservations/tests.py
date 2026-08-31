@@ -34,7 +34,7 @@ class ReservationModelTests(TestCase):
         # Crear tipo de pago
         PaymentType.objects.get_or_create(
             code='EFEC',
-            defaults={'name': 'EFECTIVO', 'active': True}
+            defaults={'name': 'EFECTIVO'}
         )
         
         self.user = User.objects.create_user(
@@ -134,7 +134,7 @@ class ReservationAPITests(APITestCase):
         # Crear tipo de pago
         PaymentType.objects.get_or_create(
             code='EFEC',
-            defaults={'name': 'EFECTIVO', 'active': True}
+            defaults={'name': 'EFECTIVO'}
         )
         
         self.client = APIClient()
@@ -192,6 +192,7 @@ class ReservationAPITests(APITestCase):
         )
 
         self.payment_type = PaymentType.objects.get(code='EFEC')
+        self.status_pending = ReservationStatus.objects.get(code='PEND')
 
     def test_list_payment_types(self):
         """Test para listar tipos de pago."""
@@ -211,7 +212,8 @@ class ReservationAPITests(APITestCase):
             'client_id': self.django_client.id,
             'package_id': self.package.id,
             'payment_type_id': self.payment_type.id,
-            'seller_user_id': self.user.id
+            'seller_user_id': self.user.id,
+            'status_id': self.status_pending.id,
         }
         response = self.client.post('/api/reservations/reservations/', data)
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
@@ -300,7 +302,8 @@ class ReservationAPITests(APITestCase):
             'client_id': self.django_client.id,
             'package_id': self.package.id,
             'payment_type_id': self.payment_type.id,
-            'seller_user_id': self.user.id
+            'seller_user_id': self.user.id,
+            'status_id': self.status_pending.id,
         }
         response = self.client.post('/api/reservations/reservations/', data)
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)

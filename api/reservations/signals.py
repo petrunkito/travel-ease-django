@@ -31,8 +31,5 @@ def create_default_statuses_and_payment_types(sender, **kwargs):
         for payment_type_data in payment_types:
             PaymentType.objects.get_or_create(
                 code=payment_type_data['code'],
-                defaults={
-                    'name': payment_type_data['name'],
-                    'active': True
-                }
+                defaults={'name': payment_type_data['name']}
             )

@@ -2,7 +2,7 @@
 -- Pregunta
 -- ¿Cuáles son los meses con mayores ingresos?
 -- Objetivo
--- Planificar promociones y personal.
+-- Planificar promociones.
 
 CREATE VIEW vw_TemporadaAlta
 AS

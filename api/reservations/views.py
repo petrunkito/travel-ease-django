@@ -16,7 +16,7 @@ from .serializers import (
 
 class PaymentTypeViewSet(viewsets.ReadOnlyModelViewSet):
     """ViewSet para listar tipos de pago."""
-    queryset = PaymentType.objects.filter(active=True)
+    queryset = PaymentType.objects.all()
     serializer_class = PaymentTypeSerializer
 
 

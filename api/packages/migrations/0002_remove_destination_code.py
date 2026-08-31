@@ -9,9 +9,4 @@ class Migration(migrations.Migration):
         ('packages', '0001_initial'),
     ]
 
-    operations = [
-        migrations.RemoveField(
-            model_name='destination',
-            name='code',
-        ),
-    ]
+    operations = []

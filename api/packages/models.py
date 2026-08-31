@@ -5,6 +5,7 @@ from django.db import models
 class Destination(models.Model):
     city = models.CharField(max_length=100, db_column='Ciudad')
     country = models.CharField(max_length=100, db_column='Pais')
+    code = models.CharField(max_length=20, db_column='Codigo', unique=True, null=True, blank=True)
     active = models.BooleanField(default=True, db_column='Activo')
 
     class Meta:

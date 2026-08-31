@@ -17,7 +17,7 @@ from .services import (
 class DestinationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Destination
-        fields = ['id', 'city', 'country', 'active']
+        fields = ['id', 'city', 'country', 'code', 'active']
         read_only_fields = ['id', 'active']
 
 

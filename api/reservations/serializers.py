@@ -11,7 +11,7 @@ from .models import (
 class PaymentTypeSerializer(serializers.ModelSerializer):
     class Meta:
         model = PaymentType
-        fields = ['id', 'name', 'code', 'active']
+        fields = ['id', 'name', 'code']
 
 
 class ReservationStatusSerializer(serializers.ModelSerializer):

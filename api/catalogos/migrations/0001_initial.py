@@ -16,8 +16,8 @@ class Migration(migrations.Migration):
             name='Department',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=100)),
-                ('code', models.CharField(max_length=20, unique=True)),
+                ('name', models.CharField(db_column='Nombre', max_length=100)),
+                ('code', models.CharField(db_column='Codigo', max_length=20, unique=True)),
             ],
             options={
                 'db_table': 'Departamento',
@@ -28,8 +28,8 @@ class Migration(migrations.Migration):
             name='Municipality',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(blank=True, max_length=100, null=True)),
-                ('code', models.CharField(max_length=20, unique=True)),
+                ('name', models.CharField(blank=True, db_column='Nombre', max_length=100, null=True)),
+                ('code', models.CharField(db_column='Codigo', max_length=20, unique=True)),
                 ('department', models.ForeignKey(blank=True, db_column='IdDepartamento', null=True, on_delete=django.db.models.deletion.PROTECT, related_name='municipalities', to='catalogos.department')),
             ],
             options={

@@ -12,8 +12,8 @@ class Municipality(models.Model):
         null=True,
         blank=True,
     )
-    name = models.CharField(max_length=100, null=True, blank=True)
-    code = models.CharField(max_length=20, unique=True)
+    name = models.CharField(max_length=100, db_column='Nombre', null=True, blank=True)
+    code = models.CharField(max_length=20, db_column='Codigo', unique=True)
 
     class Meta:
         db_table = 'Municipio'
