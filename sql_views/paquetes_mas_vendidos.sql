@@ -4,7 +4,7 @@
 -- Objetivo
 -- Identificar productos estrella.
 
-CREATE VIEW 
+CREATE VIEW vw_PaquetesMasVendidos
 AS
 SELECT top 20
     dp.NombrePaquete,
