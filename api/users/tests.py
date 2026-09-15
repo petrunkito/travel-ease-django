@@ -21,8 +21,8 @@ class UsersModuleTests(TestCase):
 		self.assertEqual(user.profile.user, user)
 
 	def test_default_groups_exist(self):
-		self.assertTrue(Group.objects.filter(name='ADMIN').exists())
-		self.assertTrue(Group.objects.filter(name='ASISTENTE').exists())
+		for role_name in ['ADMIN', 'ASISTENTE', 'GERENTE', 'CLIENTE']:
+			self.assertTrue(Group.objects.filter(name=role_name).exists())
 
 	def test_login_and_create_assistant_employee(self):
 		admin_user = self.user_model.objects.create_superuser(

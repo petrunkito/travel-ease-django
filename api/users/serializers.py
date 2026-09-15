@@ -7,7 +7,10 @@ User = get_user_model()
 
 class EmployeeCreateSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True, min_length=8)
-    role = serializers.ChoiceField(choices=['ADMIN', 'ASISTENTE'], required=False)
+    role = serializers.ChoiceField(
+        choices=['ADMIN', 'ASISTENTE', 'GERENTE', 'CLIENTE'],
+        required=False,
+    )
 
     class Meta:
         model = User
