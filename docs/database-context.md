@@ -1,5 +1,10 @@
 # 📊 Database Context - TravelEase
 
+## Cuenta de cliente
+- `Cliente.IdUsuarioCliente` relaciona cada cliente con una cuenta de `auth_user` mediante una relación 1:1.
+- Al crear un cliente desde la API se crea su usuario usando el correo como `username`, se asigna el grupo `CLIENTE` y se configura la contraseña inicial `travelease123`.
+- `Cliente.IdUsuarioRegistro` conserva el usuario autenticado que registró el cliente; no representa la cuenta del cliente.
+
 ## 🧠 Contexto General
 - documento de contexto tambien: travel_ease.sql
 TravelEase es un sistema de gestión para una agencia de viajes que permite:

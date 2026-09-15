@@ -5,6 +5,14 @@ from api.catalogos.municipios.models import Municipality
 
 
 class Client(models.Model):
+    user = models.OneToOneField(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.PROTECT,
+        related_name='client_account',
+        db_column='IdUsuarioCliente',
+        null=True,
+        blank=True,
+    )
     municipality = models.ForeignKey(
         Municipality,
         on_delete=models.PROTECT,

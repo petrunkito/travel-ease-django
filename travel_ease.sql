@@ -137,6 +137,7 @@ INSERT INTO Municipio (IdDepartamento, Nombre, Codigo) VALUES
 CREATE TABLE Cliente (
     Id INT IDENTITY PRIMARY KEY,
     IdMunicipio INT NOT NULL,
+    IdUsuarioCliente INT NULL,
     IdUsuarioRegistro INT NOT NULL,
     Nombre VARCHAR(100),
     Cedula VARCHAR(20),
@@ -145,6 +146,7 @@ CREATE TABLE Cliente (
     FechaRegistro DATETIME DEFAULT GETDATE(),
     Activo BIT DEFAULT 1,
     FOREIGN KEY (IdMunicipio) REFERENCES Municipio(Id),
+    FOREIGN KEY (IdUsuarioCliente) REFERENCES auth_user(id),
     FOREIGN KEY (IdUsuarioRegistro) REFERENCES auth_user(id)--el auth_user(id) es el auth_user de django indicando quien creo este registro
 );
 
