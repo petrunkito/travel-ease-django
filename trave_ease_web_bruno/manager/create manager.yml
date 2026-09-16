@@ -1,11 +1,11 @@
 info:
-  name: create asistant
+  name: create manager
   type: http
   seq: 2
 
 http:
   method: POST
-  url: http://127.0.0.1:8000/api/users/employees/
+  url: http://127.0.0.1:8000/api/users/managers/
   headers:
     - name: Authorization
       value: Token 8f46f93ab8f6c8432a9d760fe909222f9c5b18fb
@@ -13,9 +13,8 @@ http:
     type: json
     data: |-
       {
-      "username": "asistente1",
-      "email": "asistente1@travelease.com",
-      "password": "12345678"
+        "username": "gerente1",
+        "password": "gerentepass123"
       }
   auth: inherit
 

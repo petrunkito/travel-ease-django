@@ -6,7 +6,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from .permissions import IsAdminOrSuperuser
-from .serializers import EmployeeCreateSerializer, EmployeeListSerializer
+from .serializers import EmployeeCreateSerializer, EmployeeListSerializer, ManagerCreateSerializer
 
 
 class LoginAPIView(APIView):
@@ -58,6 +58,34 @@ class EmployeeCreateAPIView(APIView):
 				'email': user.email,
 				'is_staff': user.is_staff,
 				'roles': role_names,
+			},
+			status=status.HTTP_201_CREATED,
+		)
+
+
+class ManagerCreateAPIView(APIView):
+	permission_classes = [IsAdminOrSuperuser]
+
+	def get(self, request):
+		managers = (
+			request.user.__class__.objects.filter(groups__name='GERENTE')
+			.prefetch_related('groups')
+			.order_by('id')
+		)
+		serializer = EmployeeListSerializer(managers, many=True)
+		return Response(serializer.data, status=status.HTTP_200_OK)
+
+	def post(self, request):
+		serializer = ManagerCreateSerializer(data=request.data)
+		serializer.is_valid(raise_exception=True)
+		user = serializer.save()
+
+		return Response(
+			{
+				'id': user.id,
+				'username': user.username,
+				'is_staff': user.is_staff,
+				'roles': list(user.groups.values_list('name', flat=True)),
 			},
 			status=status.HTTP_201_CREATED,
 		)

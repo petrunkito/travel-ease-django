@@ -30,6 +30,23 @@ class EmployeeCreateSerializer(serializers.ModelSerializer):
         return user
 
 
+class ManagerCreateSerializer(serializers.ModelSerializer):
+    password = serializers.CharField(write_only=True, min_length=8)
+
+    class Meta:
+        model = User
+        fields = ['username', 'password']
+
+    def create(self, validated_data):
+        password = validated_data.pop('password')
+        user = User(**validated_data)
+        user.set_password(password)
+        user.is_staff = True
+        user.save()
+        user.groups.add(Group.objects.get(name='GERENTE'))
+        return user
+
+
 class EmployeeListSerializer(serializers.ModelSerializer):
     roles = serializers.SerializerMethodField()
 

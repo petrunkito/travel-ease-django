@@ -1,14 +1,14 @@
 info:
   name: get asistants
   type: http
-  seq: 3
+  seq: 2
 
 http:
   method: GET
   url: http://127.0.0.1:8000/api/users/employees/
   headers:
     - name: Authorization
-      value: Token 27dc59be83f1cefb0593f17fc090caca07203998
+      value: Token 8f46f93ab8f6c8432a9d760fe909222f9c5b18fb
   body:
     type: json
     data: |-
@@ -24,3 +24,4 @@ settings:
   timeout: 0
   followRedirects: true
   maxRedirects: 5
+  forwardAuthorizationHeader: true

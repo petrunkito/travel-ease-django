@@ -116,3 +116,52 @@ class UsersModuleTests(TestCase):
 
 		response = self.client.get('/api/users/employees/')
 		self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+
+	def test_admin_can_create_and_list_managers_with_roles(self):
+		admin_user = self.user_model.objects.create_superuser(
+			username='admin-manager',
+			email='admin-manager@example.com',
+			password='adminpass123',
+		)
+		self.client.force_authenticate(user=admin_user)
+
+		create_response = self.client.post(
+			'/api/users/managers/',
+			{'username': 'manager1', 'password': 'managerpass123'},
+			format='json',
+		)
+
+		self.assertEqual(create_response.status_code, status.HTTP_201_CREATED)
+		manager = self.user_model.objects.get(username='manager1')
+		self.assertTrue(manager.check_password('managerpass123'))
+		self.assertTrue(manager.is_staff)
+		self.assertTrue(manager.groups.filter(name='GERENTE').exists())
+		self.assertNotIn('password', create_response.data)
+
+		list_response = self.client.get('/api/users/managers/')
+
+		self.assertEqual(list_response.status_code, status.HTTP_200_OK)
+		manager_payload = next(
+			(item for item in list_response.data if item['username'] == 'manager1'),
+			None,
+		)
+		self.assertIsNotNone(manager_payload)
+		self.assertIn('GERENTE', manager_payload['roles'])
+		self.assertNotIn('password', manager_payload)
+
+	def test_non_admin_cannot_create_or_list_managers(self):
+		normal_user = self.user_model.objects.create_user(
+			username='normal-manager',
+			password='normalpass123',
+		)
+		self.client.force_authenticate(user=normal_user)
+
+		create_response = self.client.post(
+			'/api/users/managers/',
+			{'username': 'manager2', 'password': 'managerpass123'},
+			format='json',
+		)
+		list_response = self.client.get('/api/users/managers/')
+
+		self.assertEqual(create_response.status_code, status.HTTP_403_FORBIDDEN)
+		self.assertEqual(list_response.status_code, status.HTTP_403_FORBIDDEN)
