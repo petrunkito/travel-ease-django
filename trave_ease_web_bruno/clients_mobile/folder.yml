@@ -1,0 +1,7 @@
+info:
+  name: clients_mobile
+  type: folder
+  seq: 11
+
+request:
+  auth: inherit

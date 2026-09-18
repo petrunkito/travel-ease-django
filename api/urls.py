@@ -22,6 +22,7 @@ urlpatterns = [
     path('paquetes/', include('api.packages.urls')),
     path('clientes/', include('api.clients.urls')),
     path('clients/', include('api.clients.urls')),
+    path('clients-mobile/', include('api.clients_mobile.urls')),
     path('reservations/', include(('api.reservations.urls', 'reservations'), namespace='reservations')),
     path('reservas/', include(('api.reservations.urls', 'reservations'), namespace='reservas')),
 ]
