@@ -5,6 +5,8 @@ from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
+from api.clients.models import Client
+
 from .permissions import IsAdminOrSuperuser
 from .serializers import EmployeeCreateSerializer, EmployeeListSerializer, ManagerCreateSerializer
 
@@ -30,7 +32,19 @@ class LoginAPIView(APIView):
 			)
 
 		token, _ = Token.objects.get_or_create(user=user)
-		return Response({'token': token.key}, status=status.HTTP_200_OK)
+		role_name = user.groups.values_list('name', flat=True).first()
+		role = role_name.lower() if role_name else None
+		username = user.username
+
+		if role_name == 'CLIENTE':
+			client_name = Client.objects.filter(user=user).values_list('name', flat=True).first()
+			if client_name:
+				username = client_name
+
+		return Response(
+			{'token': token.key, 'username': username, 'rol': role},
+			status=status.HTTP_200_OK,
+		)
 
 
 class EmployeeCreateAPIView(APIView):
@@ -89,3 +103,7 @@ class ManagerCreateAPIView(APIView):
 			},
 			status=status.HTTP_201_CREATED,
 		)
+
+
+
+# hay que revisar la api de inicio de seion y ver si mete los roles correctamente
