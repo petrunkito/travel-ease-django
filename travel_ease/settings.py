@@ -114,12 +114,19 @@ DATABASES = {
             'extra_params': 'TrustServerCertificate=yes',  
         },
     },
-    'mongodb': {
+    # 'mongodb': {
+    #     'ENGINE': 'django_mongodb_backend',
+    #     'NAME': 'TravelEase',
+    #     'CLIENT': {
+    #         'host': 'mongodb://localhost:27017/',  # O tu URI de MongoDB Atlas
+    #     },
+    # },
+    'mongodb':{
         'ENGINE': 'django_mongodb_backend',
         'NAME': 'TravelEase',
         'CLIENT': {
-            'host': 'mongodb://localhost:27017/',  # O tu URI de MongoDB Atlas
-        },
+            'host': 'mongodb://127.0.0.1:27017/TravelEase?directConnection=true&serverSelectionTimeoutMS=2000',
+        }
     }
 }
 
