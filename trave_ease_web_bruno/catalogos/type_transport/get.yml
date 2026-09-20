@@ -8,7 +8,7 @@ http:
   url: http://127.0.0.1:8000/api/catalogos/type-transports/
   headers:
     - name: Authorization
-      value: Token 1a30606d73935080b8476b00db62ade847179f40
+      value: Token 18080f7fa2ed9081656d3dae09078760bfcf738c
   auth: inherit
 
 settings:
@@ -16,3 +16,4 @@ settings:
   timeout: 0
   followRedirects: true
   maxRedirects: 5
+  forwardAuthorizationHeader: true

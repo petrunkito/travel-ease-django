@@ -8,36 +8,36 @@ http:
   url: http://127.0.0.1:8000/api/packages/
   headers:
     - name: Authorization
-      value: Token f428802f42fdd14f7d1cadc8639af8be4da1e8eb
+      value: Token 18080f7fa2ed9081656d3dae09078760bfcf738c
   body:
     type: json
     data: |-
       {
         "destination": {
-          "city": "Madrid",
-          "country": "España"
+          "city": "Mexico",
+          "country": "Ciudad de Mexico"
         },
-        "name": "Viaje Madrid",
+        "name": "Viaje Mexico",
         "description": "Paquete completo con vuelo, hotel y transporte",
         "details": [
           {
             "service_type": "Vuelo",
-            "service_id": 13,
+            "service_id": 2,
             "quantity": 1
           },
              {
             "service_type": "Vuelo",
-            "service_id": 13,
+            "service_id": 2,
             "quantity": 1
           },
           {
             "service_type": "Hotel",
-            "service_id": 9,
+            "service_id": 2,
             "quantity": 2
           },
           {
             "service_type": "Transporte",
-            "service_id": 6,
+            "service_id": 2,
             "quantity": 1
           }
         ]
@@ -49,3 +49,4 @@ settings:
   timeout: 0
   followRedirects: true
   maxRedirects: 5
+  forwardAuthorizationHeader: true
