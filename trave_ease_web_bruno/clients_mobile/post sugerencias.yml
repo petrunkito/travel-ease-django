@@ -1,0 +1,27 @@
+info:
+  name: post sugerencias
+  type: http
+  seq: 5
+
+http:
+  method: POST
+  url: http://127.0.0.1:8000/api/clients-mobile/valoracion/
+  headers:
+    - name: Authorization
+      value: Token fe3ed63b11a98172ee2e77c6d1f0753f49d42159
+  body:
+    type: json
+    data: |-
+      {
+        "idReserva":10004,
+        "puntaje":5,
+        "comentario":"este es un super comentario"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: true
