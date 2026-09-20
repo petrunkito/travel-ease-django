@@ -133,6 +133,10 @@ async function loadCustomers() {
         cellNombre.textContent = cliente.name
         row.appendChild(cellNombre)
 
+        let cellCorreo = document.createElement("td")
+        cellCorreo.textContent = cliente.user_email
+        row.appendChild(cellCorreo)
+
         let cellCedula = document.createElement("td")
         cellCedula.textContent = cliente.national_id
         row.appendChild(cellCedula)
@@ -184,6 +188,7 @@ async function showCustomerForEdit(e) {
     document.getElementById("departamento").value = cliente.department_id
     await loadMunicipalitiesByDepartment(cliente.department_id)
     document.getElementById("municipio").value = cliente.municipality
+    document.getElementById("email").value = cliente.user_email
 
 }
 
@@ -195,6 +200,7 @@ function verifyFieldsForCreation() {
     let fieldCedula = document.getElementById("cedula")
     let fieldDireccion = document.getElementById("direccion")
     let fieldTelefono = document.getElementById("telefono")
+    let fieldEmail = document.getElementById("email")
 
 
     if (fieldDepartamento.value == "") {
@@ -227,6 +233,11 @@ function verifyFieldsForCreation() {
         return false;
     }
 
+    if (fieldEmail.value.trim() == "") {
+        alert("Ingrese el correo del cliente")
+        return false;
+    }
+
     return true;
 }
 
@@ -241,7 +252,8 @@ async function createCustomer() {
         name: document.getElementById("nombre").value,
         national_id: document.getElementById("cedula").value,
         address: document.getElementById("direccion").value,
-        phone_number: document.getElementById("telefono").value
+        phone_number: document.getElementById("telefono").value,
+        email: document.getElementById("email").value
     })
     .then(result => {
         
