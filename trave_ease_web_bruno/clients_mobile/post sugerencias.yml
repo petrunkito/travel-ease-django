@@ -5,7 +5,7 @@ info:
 
 http:
   method: POST
-  url: http://127.0.0.1:8000/api/clients-mobile/valoracion/
+  url: http://127.0.0.1:8000/api/clients-mobile/sugerencias/
   headers:
     - name: Authorization
       value: Token fe3ed63b11a98172ee2e77c6d1f0753f49d42159
@@ -13,8 +13,6 @@ http:
     type: json
     data: |-
       {
-        "idReserva":10004,
-        "puntaje":5,
         "comentario":"este es un super comentario"
       }
   auth: inherit

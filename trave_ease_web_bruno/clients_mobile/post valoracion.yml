@@ -13,8 +13,8 @@ http:
     type: json
     data: |-
       {
-        "idReserva":10002,
-        "puntaje":3,
+        "idReserva":10004,
+        "puntaje":5,
         "comentario":"este es un super comentario"
       }
   auth: inherit
