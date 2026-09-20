@@ -125,7 +125,7 @@ DATABASES = {
         'ENGINE': 'django_mongodb_backend',
         'NAME': 'TravelEase',
         'CLIENT': {
-            'host': 'mongodb://127.0.0.1:27017/TravelEase?directConnection=true&serverSelectionTimeoutMS=2000',
+            'host': 'mongodb://localhost:27017/',
         }
     }
 }

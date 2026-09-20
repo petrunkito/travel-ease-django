@@ -1,14 +1,14 @@
 info:
-  name: get
+  name: mongodb test
   type: http
   seq: 1
 
 http:
   method: GET
-  url: http://127.0.0.1:8000/api/packages/
+  url: http://127.0.0.1:8000/api/clients-mobile/test/
   headers:
     - name: Authorization
-      value: Token 18080f7fa2ed9081656d3dae09078760bfcf738c
+      value: Token fe3ed63b11a98172ee2e77c6d1f0753f49d42159
   auth: inherit
 
 settings:

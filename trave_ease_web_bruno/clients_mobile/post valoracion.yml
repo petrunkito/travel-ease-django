@@ -1,20 +1,21 @@
 info:
-  name: post
+  name: post valoracion
   type: http
-  seq: 3
+  seq: 4
 
 http:
   method: POST
-  url: http://127.0.0.1:8000/api/catalogos/type-transports/
+  url: http://127.0.0.1:8000/api/clients-mobile/valoracion/
   headers:
     - name: Authorization
-      value: Token 18080f7fa2ed9081656d3dae09078760bfcf738c
+      value: Token fe3ed63b11a98172ee2e77c6d1f0753f49d42159
   body:
     type: json
     data: |-
       {
-        "name": "Taxi",
-        "code": "TAXI"
+        "idReserva":10004,
+        "puntaje":5,
+        "comentario":"este es un super comentario"
       }
   auth: inherit
 

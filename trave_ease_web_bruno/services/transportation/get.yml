@@ -8,7 +8,7 @@ http:
   url: http://127.0.0.1:8000/api/services/transportation/
   headers:
     - name: Authorization
-      value: Token f428802f42fdd14f7d1cadc8639af8be4da1e8eb
+      value: Token 18080f7fa2ed9081656d3dae09078760bfcf738c
   auth: inherit
 
 settings:
@@ -16,3 +16,4 @@ settings:
   timeout: 0
   followRedirects: true
   maxRedirects: 5
+  forwardAuthorizationHeader: true

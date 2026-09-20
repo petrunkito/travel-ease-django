@@ -8,17 +8,17 @@ http:
   url: http://127.0.0.1:8000/api/services/flights/
   headers:
     - name: Authorization
-      value: Token f428802f42fdd14f7d1cadc8639af8be4da1e8eb
+      value: Token 18080f7fa2ed9081656d3dae09078760bfcf738c
   body:
     type: json
     data: |-
       {
-        "airline":"avianca",
+        "airline":"airline",
         "origin":"managua",
-        "destination":"mexico",
+        "destination":"espana",
         "departure_date":"2026-05-01T10:00:00Z",
         "arrival_date":"2026-05-01T20:00:00Z",
-        "price":"500"
+        "price":"600"
 
       }
   auth: inherit
@@ -28,3 +28,4 @@ settings:
   timeout: 0
   followRedirects: true
   maxRedirects: 5
+  forwardAuthorizationHeader: true
