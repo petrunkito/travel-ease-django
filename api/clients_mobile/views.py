@@ -13,7 +13,11 @@ from api.reservations.models import Reservation, ReservationDetail
 from api.services.flights.models import Flight
 from api.services.hotels.models import Hotel
 from api.services.transportation.models import Transportation
-from .serializers import SugerenciaSerializer, ValoracionSerializer
+from .serializers import (
+    EncuestaSatisfaccionSerializer,
+    SugerenciaSerializer,
+    ValoracionSerializer,
+)
 
 from django.conf import settings
 from django.db import connections
@@ -233,6 +237,45 @@ class SugerenciaClienteView(ClienteBaseAPIView):
             {
                 'mensaje': 'Sugerencia guardada correctamente.',
                 'id': str(result.inserted_id),
+            },
+            status=status.HTTP_201_CREATED,
+        )
+
+
+class EncuestaSatisfaccionClienteView(ClienteBaseAPIView):
+    def post(self, request):
+        serializer = EncuestaSatisfaccionSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+
+       
+
+        cliente = request.cliente
+        document = {
+            'idCliente': cliente.id,
+            'cedulaCliente': cliente.national_id,
+            'nombreCliente': cliente.name,
+            'numeroTelefono': cliente.phone_number,
+            **serializer.validated_data,
+        }
+
+        try:
+            connection = connections['mongodb']
+            connection.ensure_connection()
+            database = connection.connection[settings.DATABASES['mongodb']['NAME']]
+            result = database['encuestaSatisfaccion'].insert_one(document)
+        except Exception as error:
+            return Response(
+                {
+                    'mensaje': 'Error al guardar la encuesta de satisfacción en MongoDB.',
+                    'detalle': str(error),
+                },
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            )
+
+        return Response(
+            {
+                'mensaje': 'Encuesta de satisfacción guardada correctamente.',
+                'id': str(result.inserted_id)
             },
             status=status.HTTP_201_CREATED,
         )

@@ -1,0 +1,25 @@
+info:
+  name: post encuesta satisfaccion
+  type: http
+  seq: 6
+
+http:
+  method: POST
+  url: http://127.0.0.1:8000/api/clients-mobile/sugerencias/
+  headers:
+    - name: Authorization
+      value: Token fe3ed63b11a98172ee2e77c6d1f0753f49d42159
+  body:
+    type: json
+    data: |-
+      {
+        "comentario":"este es un super comentario"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: true
