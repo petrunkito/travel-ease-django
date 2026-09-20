@@ -8,12 +8,12 @@ http:
   url: http://127.0.0.1:8000/api/clients-mobile/sugerencias/
   headers:
     - name: Authorization
-      value: Token fe3ed63b11a98172ee2e77c6d1f0753f49d42159
+      value: Token 63b5a93b1f4d3a7fdbe3152d253b19990d606087
   body:
     type: json
     data: |-
       {
-        "comentario":"este es un super comentario"
+        "comentario":"deberian optimizar la atencion al cliente, del resto todo bien"
       }
   auth: inherit
 

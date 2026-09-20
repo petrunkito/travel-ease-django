@@ -5,16 +5,24 @@ info:
 
 http:
   method: POST
-  url: http://127.0.0.1:8000/api/clients-mobile/sugerencias/
+  url: http://127.0.0.1:8000/api/clients-mobile/encuesta-satisfaccion/
   headers:
     - name: Authorization
-      value: Token fe3ed63b11a98172ee2e77c6d1f0753f49d42159
+      value: Token 63b5a93b1f4d3a7fdbe3152d253b19990d606087
   body:
     type: json
-    data: |-
+    data: |+
       {
-        "comentario":"este es un super comentario"
+        "atencionAlCliente": 4,
+        "facilidadReserva": 4,
+        "relacionCalidadPrecio": 5,
+        "calidadServicioProporcionado": 5,
+        "caracteristicaFav": "Buen catálogo.",
+        "informacionProporcionadaSencilla":1,
+        "recomendarAOtros": 1,
+        "volverContratar": 1
       }
+
   auth: inherit
 
 settings:

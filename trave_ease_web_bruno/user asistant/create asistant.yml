@@ -13,8 +13,8 @@ http:
     type: json
     data: |-
       {
-      "username": "asistente2",
-      "email": "asistente2@travelease.com",
+      "username": "asistente3",
+      "email": "asistente3@travelease.com",
       "password": "12345678"
       }
   auth: inherit

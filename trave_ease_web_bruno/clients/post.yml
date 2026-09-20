@@ -8,17 +8,17 @@ http:
   url: http://127.0.0.1:8000/api/clients/
   headers:
     - name: Authorization
-      value: Token 18080f7fa2ed9081656d3dae09078760bfcf738c
+      value: Token 74aaa0ce304ce66ea07eca3b45e01a9cc0a7b803
   body:
     type: json
     data: |-
       {
       "municipality": 10,
-      "name": "Carlo Manrique",
-      "national_id": "001-020202-0002B",
-      "address": "Irac",
+      "name": "pedro",
+      "national_id": "001-080103-1052B",
+      "address": "Los ladinos",
       "phone_number": "54365434",
-      "email":"carlomanrique@domain.com"
+      "email":"pedro@domain.com"
       }
   auth: inherit
 
