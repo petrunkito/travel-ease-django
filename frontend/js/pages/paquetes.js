@@ -357,7 +357,7 @@ async function addServiceToPackage(element) {
 		alert("La cantidad debe ser mayor a 0");
 		return;
 	}
-	let existElement = nuevosServicios.find(x => x.id === element.id)
+	let existElement = nuevosServicios.find(x => x.id === element.id && x.tipo_servicio === element.tipo_servicio)
 	if (existElement) {
 		existElement.cantidad += element.cantidad;
 	} else {
