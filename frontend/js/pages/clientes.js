@@ -99,6 +99,7 @@ function cleanFields() {
     let fieldCedula = document.getElementById("cedula")
     let fieldDireccion = document.getElementById("direccion")
     let fieldTelefono = document.getElementById("telefono")
+    let fieldEmail = document.getElementById("email")
 
     fieldDepartamento.value = ""
     fieldMunicipio.innerHTML = "<option value=''>Seleccione un municipio</option>"
@@ -107,6 +108,7 @@ function cleanFields() {
     fieldDireccion.value = ""
     fieldTelefono.value = ""
     let selectedCustomerId = null;
+    fieldEmail.value = ""
 
 }
 
