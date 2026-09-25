@@ -1,4 +1,5 @@
 import { loadPage } from './router.js';
+let initalPage = "servicios"
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -11,13 +12,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     initializeMenu();
 
-    const homeButton = document.querySelector('.menu-item[data-page="home"]');
+    const homeButton = document.querySelector(`.menu-item[data-page="${initalPage}"]`);
 
     if (homeButton) {
         updateActiveButton(homeButton);
     }
 
-    loadPage('home');
+    loadPage(initalPage);
 });
 
 function initializeMenu() {
