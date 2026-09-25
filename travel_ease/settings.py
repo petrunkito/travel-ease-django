@@ -104,16 +104,16 @@ DATABASES = {
             'extra_params': 'TrustServerCertificate=yes',  
         },
     },
-    'dw': {
-        'ENGINE': 'mssql', 
-        'NAME': 'DW_Travelease', 
-        'HOST': 'DESKTOP-P3432ON',  
-        'PORT': '1433', 
-        'OPTIONS': {
-            'driver': 'ODBC Driver 17 for SQL Server',  
-            'extra_params': 'TrustServerCertificate=yes',  
-        },
-    },
+    # 'dw': {
+    #     'ENGINE': 'mssql', 
+    #     'NAME': 'DW_Travelease', 
+    #     'HOST': 'DESKTOP-P3432ON',  
+    #     'PORT': '1433', 
+    #     'OPTIONS': {
+    #         'driver': 'ODBC Driver 17 for SQL Server',  
+    #         'extra_params': 'TrustServerCertificate=yes',  
+    #     },
+    # },
     'mongodb':{
         'ENGINE': 'django_mongodb_backend',
         'NAME': 'TravelEase',
