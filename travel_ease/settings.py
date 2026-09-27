@@ -96,7 +96,7 @@ DATABASES = {
     # }, 
     'default': {
         'ENGINE': 'mssql', 
-        'NAME': 'traveleasedevelopment', 
+        'NAME': 'TravelEase', 
         'HOST': 'DESKTOP-P3432ON',  
         'PORT': '1433', 
         'OPTIONS': {
