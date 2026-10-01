@@ -25,7 +25,13 @@ SECRET_KEY = 'django-insecure-+u)u-#+zo4mgp)!8=(+sg9f!kvkp_s#h^1hmi#ssb#1-7@1e9n
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+
+ALLOWED_HOSTS = ['backend.travelease.local', '127.0.0.1', 'localhost']
+
+# Encabezados de proxy para producción tras IIS/ARR
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+USE_X_FORWARDED_HOST = True
+USE_X_FORWARDED_PORT = True
 
 
 # Application definition
@@ -96,7 +102,7 @@ DATABASES = {
     # }, 
     'default': {
         'ENGINE': 'mssql', 
-        'NAME': 'TravelEase', 
+        'NAME': 'TravelEaseDevelopment', 
         'HOST': 'DESKTOP-P3432ON',  
         'PORT': '1433', 
         'OPTIONS': {

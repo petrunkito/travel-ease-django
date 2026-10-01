@@ -5,7 +5,7 @@ info:
 
 http:
   method: GET
-  url: http://127.0.0.1:8000/api/municipios/departamento/2/
+  url: http://127.0.0.1:8000/api/municipios/departamento/5/
   auth: inherit
 
 settings:
@@ -13,3 +13,4 @@ settings:
   timeout: 0
   followRedirects: true
   maxRedirects: 5
+  forwardAuthorizationHeader: true

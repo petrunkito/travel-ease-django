@@ -15,6 +15,7 @@ async function init() {
     let fieldLimpiar = document.getElementById("cliente-reset-button")
     let fieldCreateCustomer = document.getElementById("cliente-save-button")
     let fieldForm = document.getElementById("cliente-form")
+    let buttonRefreshCustomer = document.getElementById("clientes-refresh-button")
 
     let resultDepartments = await getDepartamentos()
     if (!resultDepartments.ok) {
@@ -23,6 +24,10 @@ async function init() {
 
     loadDepartments(resultDepartments.content);
     loadCustomers()
+
+    buttonRefreshCustomer.addEventListener("click", (e)=>{
+        loadCustomers();
+    })
 
     fieldLimpiar.addEventListener("click", cleanFields)
     fieldCreateCustomer.addEventListener("click", async (e) => {
