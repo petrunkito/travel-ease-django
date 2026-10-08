@@ -29,6 +29,13 @@ function initializeMenu() {
 
         button.addEventListener('click', () => {
 
+            if(button.id === "closeSesion")
+            {
+                localStorage.removeItem("auth_token")
+                window.location.href = "login.html"
+                return
+            }
+
             const page = button.dataset.page;
 
             updateActiveButton(button);
