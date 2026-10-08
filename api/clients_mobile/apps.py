@@ -2,4 +2,4 @@ from django.apps import AppConfig
 
 
 class ClientsMobileConfig(AppConfig):
-    name = 'clients_mobile'
+    name = 'api.clients_mobile'

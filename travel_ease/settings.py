@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-+u)u-#+zo4mgp)!8=(+sg9f!kvkp_s#h^1hmi#ssb#1-7@1e9n
 DEBUG = True
 
 
-ALLOWED_HOSTS = ['backend.travelease.local', '127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['backend.travelease.local', '127.0.0.1', '192.168.1.43', 'localhost', 'ventas.travelease.local']
 
 # Encabezados de proxy para producción tras IIS/ARR
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
@@ -52,10 +52,12 @@ INSTALLED_APPS = [
     'api.packages.apps.PackagesConfig',
     'api.reservations.apps.ReservationsConfig',
     'api.users.apps.UsersConfig',
+    'api.clients_mobile.apps.ClientsMobileConfig',
     'corsheaders',
 ]
 
 MIDDLEWARE = [
+    # 'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -63,15 +65,17 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
 ]
 
-# CORS_ALLOWED_ORIGINS = [
-#     "http://localhost:3000",
-#     "http://192.168.1.50:3000",
-# ]
-CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOWED_ORIGINS = [
+    "http://ventas.travelease.local",
+    "https://ventas.travelease.local",
+]
+CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_CREDENTIALS = False
+
+
 ROOT_URLCONF = 'travel_ease.urls'
 
 TEMPLATES = [
@@ -94,20 +98,24 @@ WSGI_APPLICATION = 'travel_ease.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
-
+import os
+from dotenv import load_dotenv
+load_dotenv(BASE_DIR / "production.env")
 DATABASES = {
     # 'default': {
     #     'ENGINE': 'django.db.backends.sqlite3',
     #     'NAME': BASE_DIR / 'db.sqlite3',
     # }, 
     'default': {
-        'ENGINE': 'mssql', 
-        'NAME': 'TravelEaseDevelopment', 
-        'HOST': 'DESKTOP-P3432ON',  
-        'PORT': '1433', 
+        'ENGINE': os.getenv("DB_ENGINE"), 
+        'NAME': os.getenv("DB_NAME"), 
+        'HOST': os.getenv("DB_HOST"),  
+        'PORT': os.getenv("DB_PORT"), 
+        'USER': os.getenv("DB_USER"), 
+        'PASSWORD':os.getenv("DB_PASSWORD"),
         'OPTIONS': {
-            'driver': 'ODBC Driver 17 for SQL Server',  
-            'extra_params': 'TrustServerCertificate=yes',  
+            'driver': os.getenv("DB_DRIVER"),  
+            'extra_params': os.getenv("DB_EXTRA_PARAMS"),  
         },
     },
     # 'dw': {
@@ -122,10 +130,14 @@ DATABASES = {
     # },
     'mongodb':{
         'ENGINE': 'django_mongodb_backend',
-        'NAME': 'TravelEase',
-        'CLIENT': {
-            'host': 'mongodb://localhost:27017/',
-        }
+        'NAME': os.getenv("MONGO_NAME"),
+        'USER': os.getenv("MONGO_USER"),
+        'PASSWORD': os.getenv("MONGO_PASSWORD"),
+        # django-mongodb-backend reads the MongoDB URI from HOST.
+        'HOST': os.getenv("MONGO_HOST"),
+        'OPTIONS': {
+            'authSource': os.getenv("MONGO_AUTH_SOURCE", "admin"),
+        },
     }
 }
 

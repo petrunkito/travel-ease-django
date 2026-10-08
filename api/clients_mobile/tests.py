@@ -114,3 +114,29 @@ class ClientReservationsViewTests(TestCase):
 			mongo_collection.insert_one.call_args.args[0]['recomendarAOtros'],
 			True,
 		)
+
+	@patch('api.clients_mobile.views.Sugerencia.objects')
+	def test_creates_suggestion_with_mongodb_orm(self, objects):
+		manager = objects.using.return_value
+		suggestion = manager.create.return_value
+		suggestion.pk = 'suggestion-id'
+
+		response = self.api_client.post(
+			'/api/clients-mobile/sugerencias/',
+			{'comentario': 'Excelente atención.'},
+			format='json',
+		)
+
+		self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+		self.assertEqual(response.data, {
+			'mensaje': 'Sugerencia guardada correctamente.',
+			'id': 'suggestion-id',
+		})
+		objects.using.assert_called_once_with('mongodb')
+		manager.create.assert_called_once_with(
+			client_id=self.client_account.id,
+			client_national_id=self.client_account.national_id,
+			client_name=self.client_account.name,
+			client_phone_number=self.client_account.phone_number,
+			comment='Excelente atención.',
+		)

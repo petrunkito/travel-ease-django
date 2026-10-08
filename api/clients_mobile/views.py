@@ -13,6 +13,7 @@ from api.reservations.models import Reservation, ReservationDetail
 from api.services.flights.models import Flight
 from api.services.hotels.models import Hotel
 from api.services.transportation.models import Transportation
+from .models import Sugerencia
 from .serializers import (
     EncuestaSatisfaccionSerializer,
     SugerenciaSerializer,
@@ -22,8 +23,6 @@ from .serializers import (
 from django.conf import settings
 from django.db import connections
 
-
-from rest_framework.exceptions import APIException
 
 from bson import json_util
 import json
@@ -211,19 +210,16 @@ class SugerenciaClienteView(ClienteBaseAPIView):
         serializer.is_valid(raise_exception=True)
 
         cliente = request.cliente
-        document = {
-            'idCliente': cliente.id,
-            'cedulaCliente': cliente.national_id,
-            'nombreCliente': cliente.name,
-            'numeroTelefono': cliente.phone_number,
-            'comentario': serializer.validated_data['comentario'],
-        }
 
         try:
-            connection = connections['mongodb']
-            connection.ensure_connection()
-            database = connection.connection[settings.DATABASES['mongodb']['NAME']]
-            result = database['sugerencias'].insert_one(document)
+            
+            suggestion = Sugerencia.objects.using('mongodb').create(
+                client_id=cliente.id,
+                client_national_id=cliente.national_id,
+                client_name=cliente.name,
+                client_phone_number=cliente.phone_number,
+                **serializer.validated_data,
+            )
         except Exception as error:
             return Response(
                 {
@@ -236,7 +232,7 @@ class SugerenciaClienteView(ClienteBaseAPIView):
         return Response(
             {
                 'mensaje': 'Sugerencia guardada correctamente.',
-                'id': str(result.inserted_id),
+                'id': str(suggestion.pk),
             },
             status=status.HTTP_201_CREATED,
         )
