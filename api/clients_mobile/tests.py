@@ -1,5 +1,5 @@
 from decimal import Decimal
-from unittest.mock import MagicMock, patch
+from unittest.mock import patch
 
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import Group
@@ -10,7 +10,8 @@ from rest_framework.test import APIClient
 from api.catalogos.departamentos.models import Department
 from api.catalogos.municipios.models import Municipality
 from api.clients.models import Client
-from api.reservations.models import Invoice, PaymentType, Reservation
+from api.packages.models import Destination, TouristPackage
+from api.reservations.models import Invoice, PaymentType, Reservation, ReservationDetail
 
 
 class ClientReservationsViewTests(TestCase):
@@ -69,21 +70,20 @@ class ClientReservationsViewTests(TestCase):
 			'tipo_pago': 'Efectivo',
 		}])
 
-	def test_creates_satisfaction_survey_in_mongodb(self):
+	@patch('api.clients_mobile.views.SatisfactionSurvey.objects')
+	def test_creates_satisfaction_survey_with_mongodb_orm(self, objects):
 		reservation = Reservation.objects.create(
 			client=self.client_account,
 			payment_type=self.payment_type,
 			seller_user=self.user,
 			total=Decimal('125.50'),
 		)
-		mongo_connection = MagicMock()
-		mongo_database = MagicMock()
-		mongo_collection = MagicMock()
-		mongo_collection.insert_one.return_value.inserted_id = 'survey-id'
-		mongo_connection.connection = {'TravelEase': mongo_database}
-		mongo_database.__getitem__.return_value = mongo_collection
+		manager = objects.using.return_value
+		survey = manager.create.return_value
+		survey.pk = 'survey-id'
 
 		payload = {
+			'idReserva': reservation.id,
 			'atencionAlCliente': 4,
 			'facilidadReserva': 4,
 			'relacionCalidadPrecio': 5,
@@ -94,25 +94,32 @@ class ClientReservationsViewTests(TestCase):
 			'volverContratar': 1,
 		}
 
-		with patch('api.clients_mobile.views.connections') as connections:
-			connections.__getitem__.return_value = mongo_connection
-			response = self.api_client.post(
-				'/api/clients-mobile/encuesta-satisfaccion/',
-				payload,
-				format='json',
-			)
+		response = self.api_client.post(
+			'/api/clients-mobile/encuesta-satisfaccion/',
+			payload,
+			format='json',
+		)
 
 		self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-		self.assertEqual(response.data['idReserva'], reservation.id)
-		mongo_database.__getitem__.assert_called_once_with('encuestaSatisfaccion')
-		mongo_collection.insert_one.assert_called_once()
-		self.assertEqual(
-			mongo_collection.insert_one.call_args.args[0]['idCliente'],
-			self.client_account.id,
-		)
-		self.assertEqual(
-			mongo_collection.insert_one.call_args.args[0]['recomendarAOtros'],
-			True,
+		self.assertEqual(response.data, {
+			'mensaje': 'Encuesta de satisfacción guardada correctamente.',
+			'id': 'survey-id',
+		})
+		objects.using.assert_called_once_with('mongodb')
+		manager.create.assert_called_once_with(
+			client_id=self.client_account.id,
+			client_national_id=self.client_account.national_id,
+			client_name=self.client_account.name,
+			client_phone_number=self.client_account.phone_number,
+			reservation_id=reservation.id,
+			customer_service=4,
+			reservation_ease=4,
+			value_for_money=5,
+			service_quality=5,
+			favorite_feature='Buen catálogo.',
+			simple_information=True,
+			recommend_to_others=True,
+			would_hire_again=True,
 		)
 
 	@patch('api.clients_mobile.views.Sugerencia.objects')
@@ -139,4 +146,71 @@ class ClientReservationsViewTests(TestCase):
 			client_name=self.client_account.name,
 			client_phone_number=self.client_account.phone_number,
 			comment='Excelente atención.',
+		)
+
+	@patch('api.clients_mobile.views._service_snapshot')
+	@patch('api.clients_mobile.views.Valoracion.objects')
+	def test_creates_valuation_with_mongodb_orm(self, objects, service_snapshot):
+		destination = Destination.objects.create(
+			city='Managua',
+			country='Nicaragua',
+			code='MOBILE-DEST',
+		)
+		package = TouristPackage.objects.create(
+			created_by=self.user,
+			destination=destination,
+			name='Paquete móvil',
+			description='Paquete para valoración',
+		)
+		reservation = Reservation.objects.create(
+			client=self.client_account,
+			payment_type=self.payment_type,
+			seller_user=self.user,
+			total=Decimal('125.50'),
+		)
+		ReservationDetail.objects.create(
+			reservation=reservation,
+			package_id=package.id,
+			service_type='Vuelo',
+			service_id=1,
+			quantity=1,
+			unit_price=Decimal('125.50'),
+			total=Decimal('125.50'),
+		)
+		service_snapshot_data = {'origen': 'Managua', 'destino': 'Madrid'}
+		service_snapshot.return_value = ('vuelo', service_snapshot_data)
+		manager = objects.using.return_value
+		valuation = manager.create.return_value
+		valuation.pk = 'valuation-id'
+
+		response = self.api_client.post(
+			'/api/clients-mobile/valoracion/',
+			{
+				'idReserva': reservation.id,
+				'puntaje': 5,
+				'comentario': 'Excelente servicio.',
+			},
+			format='json',
+		)
+
+		self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+		self.assertEqual(response.data, {
+			'mensaje': 'Valoración guardada correctamente.',
+			'id': 'valuation-id',
+		})
+		objects.using.assert_called_once_with('mongodb')
+		manager.create.assert_called_once_with(
+			client_id=self.client_account.id,
+			client_national_id=self.client_account.national_id,
+			client_name=self.client_account.name,
+			client_phone_number=self.client_account.phone_number,
+			reservation_id=reservation.id,
+			score=5,
+			comment='Excelente servicio.',
+			package_name='Paquete móvil',
+			package_description='Paquete para valoración',
+			price=Decimal('125.50'),
+			flight=[service_snapshot_data],
+			hotel=None,
+			transportation=None,
 		)

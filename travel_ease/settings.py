@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-+u)u-#+zo4mgp)!8=(+sg9f!kvkp_s#h^1hmi#ssb#1-7@1e9n
 DEBUG = True
 
 
-ALLOWED_HOSTS = ['backend.travelease.local', '127.0.0.1', '192.168.1.43', 'localhost', 'ventas.travelease.local']
+ALLOWED_HOSTS = ['backend.travelease.local', '127.0.0.1:5500', '127.0.0.1', '192.168.1.43', 'localhost', 'ventas.travelease.local']
 
 # Encabezados de proxy para producción tras IIS/ARR
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
@@ -57,7 +57,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    # 'corsheaders.middleware.CorsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -68,13 +68,20 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
 ]
 
-CORS_ALLOWED_ORIGINS = [
-    "http://ventas.travelease.local",
-    "https://ventas.travelease.local",
-]
-CORS_ALLOW_CREDENTIALS = True
-CORS_ALLOW_CREDENTIALS = False
+# CORS_ALLOWED_ORIGINS = [
+#     "http://ventas.travelease.local",
+#     "https://ventas.travelease.local",
+# ]
+# CORS_ALLOW_CREDENTIALS = True
+# CORS_ALLOW_CREDENTIALS = False
 
+CORS_ALLOWED_ORIGINS = [
+    "http://127.0.0.1:5500",
+    "http://localhost:5500",
+]
+
+# O bien, permitir todos los orígenes (Solo para pruebas rápidas en desarrollo)
+# CORS_ALLOW_ALL_ORIGINS = True
 
 ROOT_URLCONF = 'travel_ease.urls'
 

@@ -13,7 +13,7 @@ from api.reservations.models import Reservation, ReservationDetail
 from api.services.flights.models import Flight
 from api.services.hotels.models import Hotel
 from api.services.transportation.models import Transportation
-from .models import Sugerencia
+from .models import SatisfactionSurvey, Sugerencia, Valoracion
 from .serializers import (
     EncuestaSatisfaccionSerializer,
     SugerenciaSerializer,
@@ -167,25 +167,22 @@ class ValoracionClienteView(ClienteBaseAPIView):
             service_key, service_data = _service_snapshot(detail)
             service_groups.setdefault(service_key, []).append(service_data)
 
-        document = {
-            'idCliente': reservation.client_id,
-            'cedulaCliente': reservation.client.national_id,
-            'nombreCliente': reservation.client.name,
-            'numeroTelefono': reservation.client.phone_number,
-            'idReserva': reservation.id,
-            'puntaje': serializer.validated_data['puntaje'],
-            'comentario': serializer.validated_data['comentario'],
-            'nombre': package.name,
-            'descripcion': package.description,
-            'precio': float(reservation.total),
-            **service_groups,
-        }
-
         try:
-            connection = connections['mongodb']
-            connection.ensure_connection()
-            database = connection.connection[settings.DATABASES['mongodb']['NAME']]
-            result = database['valaracion'].insert_one(document)
+            valuation = Valoracion.objects.using('mongodb').create(
+                client_id=reservation.client_id,
+                client_national_id=reservation.client.national_id,
+                client_name=reservation.client.name,
+                client_phone_number=reservation.client.phone_number,
+                reservation_id=reservation.id,
+                score=serializer.validated_data['puntaje'],
+                comment=serializer.validated_data['comentario'],
+                package_name=package.name,
+                package_description=package.description,
+                price=reservation.total,
+                flight=service_groups.get('vuelo'),
+                hotel=service_groups.get('hotel'),
+                transportation=service_groups.get('transporte'),
+            )
         except Exception as error:
             return Response(
                 {
@@ -198,7 +195,7 @@ class ValoracionClienteView(ClienteBaseAPIView):
         return Response(
             {
                 'mensaje': 'Valoración guardada correctamente.',
-                'id': str(result.inserted_id),
+                'id': str(valuation.pk),
             },
             status=status.HTTP_201_CREATED,
         )
@@ -246,19 +243,14 @@ class EncuestaSatisfaccionClienteView(ClienteBaseAPIView):
        
 
         cliente = request.cliente
-        document = {
-            'idCliente': cliente.id,
-            'cedulaCliente': cliente.national_id,
-            'nombreCliente': cliente.name,
-            'numeroTelefono': cliente.phone_number,
-            **serializer.validated_data,
-        }
-
         try:
-            connection = connections['mongodb']
-            connection.ensure_connection()
-            database = connection.connection[settings.DATABASES['mongodb']['NAME']]
-            result = database['encuestaSatisfaccion'].insert_one(document)
+            survey = SatisfactionSurvey.objects.using('mongodb').create(
+                client_id=cliente.id,
+                client_national_id=cliente.national_id,
+                client_name=cliente.name,
+                client_phone_number=cliente.phone_number,
+                **serializer.validated_data,
+            )
         except Exception as error:
             return Response(
                 {
@@ -271,7 +263,7 @@ class EncuestaSatisfaccionClienteView(ClienteBaseAPIView):
         return Response(
             {
                 'mensaje': 'Encuesta de satisfacción guardada correctamente.',
-                'id': str(result.inserted_id)
+                'id': str(survey.pk)
             },
             status=status.HTTP_201_CREATED,
         )
