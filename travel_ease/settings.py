@@ -101,7 +101,7 @@ WSGI_APPLICATION = 'travel_ease.wsgi.application'
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 import os
 from dotenv import load_dotenv
-load_dotenv(BASE_DIR / "production.env")
+load_dotenv()
 DATABASES = {
     # 'default': {
     #     'ENGINE': 'django.db.backends.sqlite3',
