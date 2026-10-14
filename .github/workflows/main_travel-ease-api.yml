@@ -36,7 +36,7 @@ jobs:
       - name: Upload artifact for deployment jobs
         uses: actions/upload-artifact@v4
         with:
-          name: python-app
+          name: travel_ease
           path: |
             .
             !antenv/
@@ -58,7 +58,7 @@ jobs:
       - name: Download artifact from build job
         uses: actions/download-artifact@v4
         with:
-          name: python-app
+          name: travel_ease
       
       - name: Login to Azure
         uses: azure/login@v2
@@ -71,6 +71,6 @@ jobs:
         uses: azure/webapps-deploy@v3
         id: deploy-to-webapp
         with:
-          app-name: 'travel-ease-api'
+          app-name: 'travel-ease'
           slot-name: 'Production'
           
