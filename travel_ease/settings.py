@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-+u)u-#+zo4mgp)!8=(+sg9f!kvkp_s#h^1hmi#ssb#1-7@1e9n
 DEBUG = True
 
 
-ALLOWED_HOSTS = ['backend.travelease.local', '127.0.0.1:5500', '127.0.0.1', '192.168.1.43', 'localhost', 'ventas.travelease.local']
+# ALLOWED_HOSTS = ['backend.travelease.local', '127.0.0.1:3000', '127.0.0.1:5500', '127.0.0.1', '192.168.1.43', 'localhost', 'ventas.travelease.local']
 
 # Encabezados de proxy para producción tras IIS/ARR
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
@@ -53,11 +53,9 @@ INSTALLED_APPS = [
     'api.reservations.apps.ReservationsConfig',
     'api.users.apps.UsersConfig',
     'api.clients_mobile.apps.ClientsMobileConfig',
-    'corsheaders',
 ]
 
 MIDDLEWARE = [
-    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -75,10 +73,6 @@ MIDDLEWARE = [
 # CORS_ALLOW_CREDENTIALS = True
 # CORS_ALLOW_CREDENTIALS = False
 
-CORS_ALLOWED_ORIGINS = [
-    "http://127.0.0.1:5500",
-    "http://localhost:5500",
-]
 
 # O bien, permitir todos los orígenes (Solo para pruebas rápidas en desarrollo)
 # CORS_ALLOW_ALL_ORIGINS = True
@@ -125,16 +119,6 @@ DATABASES = {
             'extra_params': os.getenv("DB_EXTRA_PARAMS"),  
         },
     },
-    # 'dw': {
-    #     'ENGINE': 'mssql', 
-    #     'NAME': 'DW_Travelease', 
-    #     'HOST': 'DESKTOP-P3432ON',  
-    #     'PORT': '1433', 
-    #     'OPTIONS': {
-    #         'driver': 'ODBC Driver 17 for SQL Server',  
-    #         'extra_params': 'TrustServerCertificate=yes',  
-    #     },
-    # },
     'mongodb':{
         'ENGINE': 'django_mongodb_backend',
         'NAME': os.getenv("MONGO_NAME"),
@@ -145,7 +129,18 @@ DATABASES = {
         'OPTIONS': {
             'authSource': os.getenv("MONGO_AUTH_SOURCE", "admin"),
         },
-    }
+    },
+    
+    # 'dw': {
+    #     'ENGINE': 'mssql', 
+    #     'NAME': 'DW_Travelease', 
+    #     'HOST': 'DESKTOP-P3432ON',  
+    #     'PORT': '1433', 
+    #     'OPTIONS': {
+    #         'driver': 'ODBC Driver 17 for SQL Server',  
+    #         'extra_params': 'TrustServerCertificate=yes',  
+    #     },
+    # },
 }
 
 
