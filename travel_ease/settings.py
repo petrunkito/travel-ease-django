@@ -28,7 +28,8 @@ SECRET_KEY = 'django-insecure-+u)u-#+zo4mgp)!8=(+sg9f!kvkp_s#h^1hmi#ssb#1-7@1e9n
 ALLOWED_HOSTS = [
     'travel-ease-api-dpbkcyd3a8cse3gg.mexicocentral-01.azurewebsites.net',
     'localhost',
-    '127.0.0.1'
+    '127.0.0.1',
+    #'http://localhost:3000',
 ]
 
 # ALLOWED_HOSTS = ['backend.travelease.local', '127.0.0.1:3000', '127.0.0.1:5500', '127.0.0.1', '192.168.1.43', 'localhost', 'ventas.travelease.local']
@@ -58,10 +59,12 @@ INSTALLED_APPS = [
     'api.reservations.apps.ReservationsConfig',
     'api.users.apps.UsersConfig',
     'api.clients_mobile.apps.ClientsMobileConfig',
+    #'corsheaders'
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    # 'corsheaders.middleware.CorsMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -71,10 +74,11 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
 ]
 
-# CORS_ALLOWED_ORIGINS = [
-#     "http://ventas.travelease.local",
-#     "https://ventas.travelease.local",
-# ]
+CORS_ALLOWED_ORIGINS = [
+    # "http://ventas.travelease.local",
+    # "https://ventas.travelease.local",
+    "http://localhost:3000"
+]
 # CORS_ALLOW_CREDENTIALS = True
 # CORS_ALLOW_CREDENTIALS = False
 
@@ -106,7 +110,7 @@ WSGI_APPLICATION = 'travel_ease.wsgi.application'
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 import os
 from dotenv import load_dotenv
-load_dotenv()
+load_dotenv("production.env")
 
 DEBUG = os.getenv("DEBUG", "False").lower() == "true"
 
@@ -124,7 +128,7 @@ DATABASES = {
         'USER': os.getenv("DB_USER"), 
         'PASSWORD':os.getenv("DB_PASSWORD"),
         'OPTIONS': {
-            'driver': "ODBC Driver 17 for SQL Server",  
+            'driver': "ODBC Driver 18 for SQL Server",  
             'extra_params': "Persist Security Info=no;MultipleActiveResultSets=no;Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;",  
         },
     },
