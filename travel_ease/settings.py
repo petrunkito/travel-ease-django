@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-+u)u-#+zo4mgp)!8=(+sg9f!kvkp_s#h^1hmi#ssb#1-7@1e9n'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+
 
 ALLOWED_HOSTS = [
     'travel-ease-api-dpbkcyd3a8cse3gg.mexicocentral-01.azurewebsites.net',
@@ -107,6 +107,10 @@ WSGI_APPLICATION = 'travel_ease.wsgi.application'
 import os
 from dotenv import load_dotenv
 load_dotenv()
+
+DEBUG = os.getenv("DEBUG", "False").lower() == "true"
+
+
 DATABASES = {
     # 'default': {
     #     'ENGINE': 'django.db.backends.sqlite3',
@@ -120,8 +124,8 @@ DATABASES = {
         'USER': os.getenv("DB_USER"), 
         'PASSWORD':os.getenv("DB_PASSWORD"),
         'OPTIONS': {
-            'driver': os.getenv("DB_DRIVER"),  
-            'extra_params': os.getenv("DB_EXTRA_PARAMS"),  
+            'driver': "ODBC Driver 17 for SQL Server",  
+            'extra_params': "Persist Security Info=no;MultipleActiveResultSets=no;Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;",  
         },
     },
     'mongodb':{
