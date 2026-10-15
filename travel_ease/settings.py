@@ -77,7 +77,8 @@ MIDDLEWARE = [
 CORS_ALLOWED_ORIGINS = [
     # "http://ventas.travelease.local",
     # "https://ventas.travelease.local",
-    "http://localhost:3000"
+    "http://localhost:3000",
+    "https://travel-ease-frontend-bvcxcsfhfvd7c2dw.mexicocentral-01.azurewebsites.net/"
 ]
 # CORS_ALLOW_CREDENTIALS = True
 # CORS_ALLOW_CREDENTIALS = False
