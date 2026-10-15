@@ -110,7 +110,7 @@ WSGI_APPLICATION = 'travel_ease.wsgi.application'
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 import os
 from dotenv import load_dotenv
-load_dotenv("production.env")
+load_dotenv()
 
 DEBUG = os.getenv("DEBUG", "False").lower() == "true"
 
