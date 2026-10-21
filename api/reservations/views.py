@@ -1,6 +1,7 @@
 from rest_framework import viewsets, status
 from rest_framework.decorators import action
 from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated
 from django.shortcuts import get_object_or_404
 from .models import (
     Reservation, ReservationDetail, ReservationStatus,
@@ -41,6 +42,7 @@ class ReservationViewSet(viewsets.ModelViewSet):
     """
     queryset = Reservation.objects.filter(active=True)
     serializer_class = ReservationDetailedSerializer
+    permission_classes = [IsAuthenticated]
 
     def get_serializer_class(self):
         """Retorna el serializer adecuado según la acción."""

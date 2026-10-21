@@ -29,6 +29,7 @@ ALLOWED_HOSTS = [
     'travel-ease-api-dpbkcyd3a8cse3gg.mexicocentral-01.azurewebsites.net',
     'localhost',
     '127.0.0.1',
+    'http://127.0.0.1:5500'
     #'http://localhost:3000',
 ]
 
@@ -77,7 +78,9 @@ MIDDLEWARE = [
 CORS_ALLOWED_ORIGINS = [
     # "http://ventas.travelease.local",
     # "https://ventas.travelease.local",
-    "http://localhost:3000",
+    "http://localhost:5500",
+    "http://127.0.0.1:5500",
+    "http://localhost:8000",
     "https://travel-ease-frontend-bvcxcsfhfvd7c2dw.mexicocentral-01.azurewebsites.net"
 ]
 # CORS_ALLOW_CREDENTIALS = True
