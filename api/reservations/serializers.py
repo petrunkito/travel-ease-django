@@ -1,5 +1,4 @@
 from rest_framework import serializers
-from django.contrib.auth.models import User
 from api.clients.models import Client
 from api.packages.models import TouristPackage, PackageDetail
 from .models import (
@@ -64,7 +63,6 @@ class ReservationCreateSerializer(serializers.Serializer):
     client_id = serializers.IntegerField()
     package_id = serializers.IntegerField()
     payment_type_id = serializers.IntegerField()
-    seller_user_id = serializers.IntegerField()
     status_id = serializers.IntegerField()
 
     def validate_client_id(self, value):
@@ -88,13 +86,6 @@ class ReservationCreateSerializer(serializers.Serializer):
             raise serializers.ValidationError("El tipo de pago no existe.")
         return value
 
-    def validate_seller_user_id(self, value):
-        try:
-            User.objects.get(id=value)
-        except User.DoesNotExist:
-            raise serializers.ValidationError("El usuario vendedor no existe.")
-        return value
-
     def validate_status_id(self, value):
         try:
             ReservationStatus.objects.get(id=value)
@@ -106,7 +97,9 @@ class ReservationCreateSerializer(serializers.Serializer):
         client = Client.objects.get(id=validated_data['client_id'])
         package = TouristPackage.objects.get(id=validated_data['package_id'])
         payment_type = PaymentType.objects.get(id=validated_data['payment_type_id'])
-        seller_user = User.objects.get(id=validated_data['seller_user_id'])
+        # El usuario vendedor siempre proviene de la autenticación, nunca del
+        # payload, para asociar la reserva al dueño del token enviado.
+        seller_user = self.context['request'].user
         initial_status = ReservationStatus.objects.get(id=validated_data['status_id'])
 
         # Calcular el total del paquete
