@@ -29,7 +29,6 @@ ALLOWED_HOSTS = [
     'travel-ease-api-dpbkcyd3a8cse3gg.mexicocentral-01.azurewebsites.net',
     'localhost',
     '127.0.0.1',
-    'http://127.0.0.1:5500'
     #'http://localhost:3000',
 ]
 
@@ -78,9 +77,7 @@ MIDDLEWARE = [
 CORS_ALLOWED_ORIGINS = [
     # "http://ventas.travelease.local",
     # "https://ventas.travelease.local",
-    "http://localhost:5500",
-    "http://127.0.0.1:5500",
-    "http://localhost:8000",
+    "http://localhost:3000",
     "https://travel-ease-frontend-bvcxcsfhfvd7c2dw.mexicocentral-01.azurewebsites.net"
 ]
 # CORS_ALLOW_CREDENTIALS = True
@@ -114,14 +111,10 @@ WSGI_APPLICATION = 'travel_ease.wsgi.application'
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 import os
 from dotenv import load_dotenv
-
+load_dotenv()
 
 DEBUG = os.getenv("DEBUG", "False").lower() == "true"
-if DEBUG == False:
-    load_dotenv(".env.example")
-    print("klsjdfklsdjfkljsklfjsdklfjklsdjfklsdjfklsd--------------------------")
-else:
-    load_dotenv()
+
 
 DATABASES = {
     # 'default': {
@@ -136,8 +129,8 @@ DATABASES = {
         'USER': os.getenv("DB_USER"), 
         'PASSWORD':os.getenv("DB_PASSWORD"),
         'OPTIONS': {
-            'driver': os.getenv("DB_DRIVER"),  
-            'extra_params': os.getenv("DB_EXTRA_PARAMS"),  
+            'driver': "ODBC Driver 18 for SQL Server",  
+            'extra_params': "Persist Security Info=no;MultipleActiveResultSets=no;Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;",  
         },
     },
     'mongodb':{
@@ -199,7 +192,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
-STATIC_URL = 'static/'
+
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 

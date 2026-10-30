@@ -144,6 +144,7 @@ class ReservationAPITests(APITestCase):
             email='test@test.com',
             password='testpass123'
         )
+        self.client.force_authenticate(user=self.user)
 
         self.department, _ = Department.objects.get_or_create(
             code='MAN',
@@ -236,7 +237,43 @@ class ReservationAPITests(APITestCase):
 
         response = self.client.get('/api/reservations/reservations/')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(len(response.data), 1)
+        self.assertEqual(len(response.data['data']), 1)
+        self.assertEqual(response.data['pagination']['total_records'], 1)
+        self.assertEqual(response.data['pagination']['per_page'], 20)
+        self.assertEqual(response.data['pagination']['current_page'], 1)
+        self.assertFalse(response.data['pagination']['has_next_page'])
+        self.assertFalse(response.data['pagination']['has_prev_page'])
+
+    def test_list_reservations_is_paginated_by_twenty(self):
+        """Test que el listado de reservas devuelve paginas de 20 registros."""
+        for _ in range(21):
+            Reservation.objects.create(
+                client=self.django_client,
+                payment_type=self.payment_type,
+                seller_user=self.user,
+                total=300.00
+            )
+
+        first_page = self.client.get('/api/reservations/reservations/')
+        self.assertEqual(first_page.status_code, status.HTTP_200_OK)
+        self.assertEqual(len(first_page.data['data']), 20)
+        self.assertEqual(
+            first_page.data['pagination'],
+            {
+                'total_records': 21,
+                'per_page': 20,
+                'current_page': 1,
+                'total_pages': 2,
+                'has_next_page': True,
+                'has_prev_page': False,
+            }
+        )
+
+        second_page = self.client.get('/api/reservations/reservations/?page=2')
+        self.assertEqual(second_page.status_code, status.HTTP_200_OK)
+        self.assertEqual(len(second_page.data['data']), 1)
+        self.assertTrue(second_page.data['pagination']['has_prev_page'])
+        self.assertFalse(second_page.data['pagination']['has_next_page'])
 
     def test_get_reservation_detail(self):
         """Test para obtener detalle de una reserva."""

@@ -3,6 +3,7 @@ from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from django.shortcuts import get_object_or_404
+from rest_framework.pagination import PageNumberPagination
 from .models import (
     Reservation, ReservationDetail, ReservationStatus,
     ReservationStatusHistory, PaymentType, Invoice
@@ -13,6 +14,26 @@ from .serializers import (
     ReservationStatusHistorySerializer, PaymentTypeSerializer,
     ReservationStatusSerializer, InvoiceSerializer
 )
+
+
+class ReservationPagination(PageNumberPagination):
+    page_size = 20
+    page_size_query_param = None
+
+    def get_paginated_response(self, data):
+        return Response(
+            {
+                'data': data,
+                'pagination': {
+                    'total_records': self.page.paginator.count,
+                    'per_page': self.page_size,
+                    'current_page': self.page.number,
+                    'total_pages': self.page.paginator.num_pages,
+                    'has_next_page': self.page.has_next(),
+                    'has_prev_page': self.page.has_previous(),
+                },
+            }
+        )
 
 
 class PaymentTypeViewSet(viewsets.ReadOnlyModelViewSet):
@@ -40,9 +61,10 @@ class ReservationViewSet(viewsets.ModelViewSet):
     - PUT /reservations/{id}/update_status/ - Cambiar estado de una reserva
     - GET /reservations/{id}/status_history/ - Ver historial de cambios de estado
     """
-    queryset = Reservation.objects.filter(active=True)
+    queryset = Reservation.objects.filter(active=True).order_by('id')
     serializer_class = ReservationDetailedSerializer
     permission_classes = [IsAuthenticated]
+    pagination_class = ReservationPagination
 
     def get_serializer_class(self):
         """Retorna el serializer adecuado según la acción."""
@@ -116,4 +138,3 @@ class ReservationViewSet(viewsets.ModelViewSet):
         history = reservation.status_history.all().order_by('-date')
         serializer = ReservationStatusHistorySerializer(history, many=True)
         return Response(serializer.data)
-

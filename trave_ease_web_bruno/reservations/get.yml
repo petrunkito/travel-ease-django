@@ -5,10 +5,14 @@ info:
 
 http:
   method: GET
-  url: http://127.0.0.1:8000/api/reservations/reservations
+  url: http://127.0.0.1:8000/api/reservations/reservations?page=2
   headers:
     - name: Authorization
-      value: Token 18080f7fa2ed9081656d3dae09078760bfcf738c
+      value: Token af59c71661bc7cb54de12f3bb426df79f6fa8062
+  params:
+    - name: page
+      value: "2"
+      type: query
   auth: inherit
 
 settings:
