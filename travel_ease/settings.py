@@ -113,12 +113,12 @@ import os
 from dotenv import load_dotenv
 
 
-DEBUG = os.getenv("DEBUG", "False").lower() == "true"
-if DEBUG == False:
-    load_dotenv(".env.example")
-    print("klsjdfklsdjfkljsklfjsdklfjklsdjfklsdjfklsd--------------------------")
-else:
+DEBUG = os.getenv("DEBUG", "True").lower() == "true"
+
+if not DEBUG:
     load_dotenv()
+else:
+    load_dotenv(".env.example")
 
 DATABASES = {
     # 'default': {
