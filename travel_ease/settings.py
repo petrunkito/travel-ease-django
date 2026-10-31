@@ -111,10 +111,14 @@ WSGI_APPLICATION = 'travel_ease.wsgi.application'
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 import os
 from dotenv import load_dotenv
-load_dotenv()
+
 
 DEBUG = os.getenv("DEBUG", "False").lower() == "true"
-
+if DEBUG == False:
+    load_dotenv(".env.example")
+    print("klsjdfklsdjfkljsklfjsdklfjklsdjfklsdjfklsd--------------------------")
+else:
+    load_dotenv()
 
 DATABASES = {
     # 'default': {
@@ -129,8 +133,8 @@ DATABASES = {
         'USER': os.getenv("DB_USER"), 
         'PASSWORD':os.getenv("DB_PASSWORD"),
         'OPTIONS': {
-            'driver': "ODBC Driver 18 for SQL Server",  
-            'extra_params': "Persist Security Info=no;MultipleActiveResultSets=no;Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;",  
+            'driver': os.getenv("DB_DRIVER"),  
+            'extra_params': os.getenv("DB_EXTRA_PARAMS"),  
         },
     },
     'mongodb':{
@@ -144,7 +148,7 @@ DATABASES = {
             'authSource': os.getenv("MONGO_AUTH_SOURCE", "admin"),
         },
     },
-    
+
     # 'dw': {
     #     'ENGINE': 'mssql', 
     #     'NAME': 'DW_Travelease', 
@@ -192,7 +196,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
-
+STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
